@@ -1,0 +1,91 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+
+            // // -- Oxocarbon Colorscheme --
+            // color_bg        "#161616"
+            // color_fg        "#f2f4f8"
+            // color_gray      "#262626"
+            // color_white     "#ffffff"
+            // color_red       "#ee5396"
+            // color_green     "#42be65"
+            // color_blue      "#4589ff"
+            // color_yellow    "#ffdd57"
+            // color_cyan      "#33b1ff"
+            // color_magenta   "#be95ff"
+            // color_orange    "#ff832b"
+            // color_teal      "#08bdba"
+            // color_purple    "#9f85ff"
+            // color_subtle    "#6f6f6f"
+            // color_highlight "#82cfff"
+
+            // -- Dimmer Oxocarbon Colorscheme --
+            color_bg        "#1a1a1a"
+            color_fg        "#d1d5db"
+            color_gray      "#202020"
+            color_white     "#e5e5e5"
+            color_red       "#c53071"
+            color_green     "#35954d"
+            color_blue      "#356db8"
+            color_yellow    "#d4b345"
+            color_cyan      "#2b93c4"
+            color_magenta   "#9675d9"
+            color_orange    "#d26b24"
+            color_teal      "#069d98"
+            color_purple    "#8466d1"
+            color_subtle    "#5a5a5a"
+            color_highlight "#65a4cb"
+
+            format_left "#[bg=$red,fg=$color_bg,bold]  #[bg=$color_gray,fg=$color_fg] {session} #[bg=$color_gray] {mode}#[bg=$color_gray]{tabs}"
+            format_center "{notifications}"
+            format_right  "#[bg=$color_gray,fg=$color_subtle]#[bg=$color_gray,fg=$blue] #[bg=$blue,fg=$color_bg] 󰃰 #[bg=$color_gray,fg=$color_fg] {datetime}#[bg=$color_gray,fg=$color_subtle]"
+            format_space  "#[bg=$color_gray]"
+            format_hide_on_overlength "true"
+            format_precedence "lrc"
+
+            border_enabled  "true"
+            border_char     "─"
+            border_format   "#[bg=$color_gray]{char}"
+            border_position "top"
+
+            // hide_frame_for_single_pane "true"
+
+            mode_normal        "#[bg=$black,fg=$color_bg,bold] 󰀘 N #[bg=$color_gray,fg=$teal]"
+            mode_tmux          "#[bg=$purple,fg=$color_bg,bold] 󱂬 T #[bg=$color_gray,fg=$purple]"
+            mode_locked        "#[bg=$red,fg=$color_bg,bold] 󰌾 L #[bg=$color_gray,fg=$red]"
+            mode_pane          "#[bg=$teal,fg=$color_bg,bold] 󰇦 P #[bg=$color_gray,fg=$teal]"
+            mode_tab           "#[bg=$teal,fg=$color_bg,bold] 󰓩 Tb #[bg=$color_gray,fg=$teal]"
+            mode_scroll        "#[bg=$orange,fg=$color_bg,bold] 󰔄 Sc #[bg=$color_gray,fg=$orange]"
+            mode_enter_search  "#[bg=$orange,fg=$color_bg,bold] 󰍉 Es #[bg=$color_gray,fg=$orange]"
+            mode_search        "#[bg=$orange,fg=$color_bg,bold] 󰍉 S #[bg=$color_gray,fg=$orange]"
+            mode_resize        "#[bg=$yellow,fg=$color_bg,bold] 󰒓 Rz #[bg=$color_gray,fg=$yellow]"
+            mode_rename_tab    "#[bg=$yellow,fg=$color_bg,bold] 󰑓 Rt #[bg=$color_gray,fg=$yellow]"
+            mode_rename_pane   "#[bg=$yellow,fg=$color_bg,bold] 󰑓 Rp #[bg=$color_gray,fg=$yellow]"
+            mode_move          "#[bg=$yellow,fg=$color_bg,bold] 󰯭 Mv #[bg=$color_gray,fg=$yellow]"
+            mode_session       "#[bg=$cyan,fg=$color_bg,bold] 󰆑 Ss #[bg=$color_gray,fg=$cyan]"
+            mode_prompt        "#[bg=$cyan,fg=$color_bg,bold] 󰌌 Pr #[bg=$color_gray,fg=$cyan]"
+
+            tab_normal              "#[bg=$color_gray,fg=$black] #[bg=$black,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$black,bold]"
+            tab_normal_fullscreen   "#[bg=$color_gray,fg=$black] #[bg=$black,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$black,bold]"
+            tab_normal_sync         "#[bg=$color_gray,fg=$black] #[bg=$black,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$black,bold]"
+
+            tab_active              "#[bg=$color_gray,fg=$magenta] #[bg=$magenta,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$magenta,bold]"
+            tab_active_fullscreen   "#[bg=$color_gray,fg=$magenta] #[bg=$magenta,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$magenta,bold]"
+            tab_active_sync         "#[bg=$color_gray,fg=$magenta] #[bg=$magenta,fg=$color_bg,bold] {index} #[bg=$color_subtle,fg=$magenta,bold]"
+            tab_separator           "#[bg=$color_gray]"
+
+            tab_sync_indicator       "  "
+            tab_fullscreen_indicator " 󰊓 "
+            tab_floating_indicator   " 󰹙 "
+
+            notification_format_unread "#[bg=$color_gray,fg=$yellow] #[bg=$yellow,fg=$color_bg] #[bg=$color_subtle,fg=$yellow] {message}#[bg=$color_gray,fg=$yellow]"
+            notification_format_no_notifications ""
+            notification_show_interval "10"
+
+            datetime          "{format}"
+            datetime_format   "%d-%m %H:%M "
+            datetime_timezone "Pacific/Auckland"
+        }
+    }
+    pane
+}
