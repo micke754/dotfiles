@@ -1,0 +1,80 @@
+# theme = "base16_transparent"
+theme = "peachpuff"
+
+[editor]
+scrolloff = 15
+auto-format = true
+continue-comments = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.soft-wrap]
+enable = true
+
+[editor.auto-save]
+focus-lost = true
+
+[editor.lsp]
+enable = true
+display-messages = false
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = false
+snippets = true
+goto-reference-include-declaration = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
+[editor.smart-tab]
+enable = false
+
+[keys.normal]
+
+# Personal preference
+# o = ["open_below", "normal_mode"]
+# O = ["open_above", "normal_mode"]
+
+# Muscle memory
+# "{" = ["goto_prev_paragraph", "collapse_selection"]
+# "}" = ["goto_next_paragraph", "collapse_selection"]
+
+"%" = "select_all"
+C-y = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+]
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+"C-b" = [] # Unbinds Ctrl-b in normal mode
+
+[keys.insert]
+"C-y" = ["completion"]
+"C-n" = ["move_line_down", "move_visual_line_down"]
+"C-p" = ["move_line_up", "move_visual_line_up"]
+
+
+[keys.insert.j]
+"j" = ["normal_mode"]
+
+# [keys.normal.space]
+# "t" = [
+#   "yank_to_clipboard",
+#   ":sh tmux paste-buffer -t right; tmux send-keys -t right Enter",
+# ]
+
+[keys.normal.space]
+"t" = ["yank_to_clipboard", ":sh send-to-pane-zellij"]
+
+[keys.normal.space.w]
+"w" = [":write"]
+
+[keys.normal.space.q]
+"q" = [":quit-all"]

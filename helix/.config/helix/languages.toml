@@ -1,0 +1,118 @@
+# LSP Server Config
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+[language-server.markdown-oxide]
+command = "markdown-oxide"
+
+[language-server.vale-ls]
+command = "vale-ls"
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+# [language-server.basedpyright.config.python.analysis]
+# typeCheckingMode = "basic"
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+# if you choose `ruff` itself
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.pylyzer]
+command = "pylyzer"
+args = ["--server"]
+
+[language-server.gpt]
+command = "helix-gpt --handler=codeium"
+
+# Language Config
+
+[[language]]
+name = "csv"
+file-types = ["csv"]
+scope = "source.csv"
+
+[[grammar]]
+name = "csv"
+source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
+source.rev = "896e6d09b23a1b0d87e45bf97ca34a249f41495c"
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "python"
+language-servers = ["basedpyright", "ruff"]
+formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
+auto-format = true
+
+[[language]]
+name = "sql"
+formatter = { command = "sqlfmt", args = [
+  "--stdin-filename",
+  "$FILENAME",
+  "-",
+] }
+
+[[language]]
+name = "yaml"
+formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
+auto-format = true
+language-servers = ["yaml-language-server", "ansible-language-server"]
+
+[[language]]
+name = "markdown"
+file-types = ["md"]
+language-servers = ["harper-ls", "vale-ls", "markdown-oxide"]
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = ["-"] }
+auto-format = true
+
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+auto-format = true
+
+[[language]]
+name = "html"
+formatter = { command = 'prettierd', args = [".html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+formatter = { command = 'prettierd', args = [".css"] }
+auto-format = true
+
+# [[language]]
+# name = "scss"
+# formatter = { command = 'prettierd', args = [".scss"] }
+# auto-format = true
+# language-servers = ["gpt", "vale-ls"]
+# file-types = ["txt", "md"]
+
+[[language]]
+name = "nix"
+formatter = { command = "nixpkgs-fmt" }
+
+[[language]]
+name = "nu"
+formatter = { command = "nufmt", args = ["--stdin-filename", "$FILENAME", "-"] }
+
+[[grammar]]
+name = "r"
+source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
