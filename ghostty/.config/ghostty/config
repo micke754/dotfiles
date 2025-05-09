@@ -1,0 +1,5 @@
+font-family = "FiraCode Nerd Font Propo"
+font-size = 14
+# theme = "Kanagawa Dragon"
+theme = "oxocarbon"
+fullscreen = true
