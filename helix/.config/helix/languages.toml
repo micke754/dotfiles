@@ -1,0 +1,142 @@
+# LSP Server Config
+[language-server.ccls-ls]
+command = "ccls"
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+[language-server.vale-ls]
+command = "vale-ls"
+
+[language-server.markdown-oxide]
+command = "markdown-oxide"
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.basedpyright.config.python.analysis]
+typeCheckingMode = "standard"
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "standard"
+
+# if you choose `ruff` itself
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.pylyzer]
+command = "pylyzer"
+args = ["--server"]
+
+[language-server.sqls]
+command = "sqls"
+args = ["--server"]
+
+[language-server.sqlfluff]
+command = "sqlfluff"
+args = ["lint", "--dialect", "databricks"]
+
+# Language Config
+[[language]]
+name = "c"
+language-servers = ["ccls-ls"]
+file-types = ["c", "h"]
+formatter = { command = 'clang-format' }
+auto-format = true
+
+[[language]]
+name = "cpp"
+language-servers = ["ccls-ls"]
+file-types = ["cpp", "cc", "cxx", "hpp", "hcc", "hxx"]
+formatter = { command = 'clang-format' }
+auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "python"
+language-servers = ["basedpyright", "ruff", "harper-ls"]
+formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
+auto-format = false
+
+[[language]]
+name = "sql"
+language-servers = ["sqlfluff"]
+formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
+auto-format = true
+
+[[language]]
+name = "yaml"
+formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
+auto-format = true
+language-servers = ["yaml-language-server", "ansible-language-server"]
+
+[[language]]
+name = "markdown"
+language-servers = ["markdown-oxide", "vale-ls", "harper-ls"]
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = ["-"] }
+auto-format = true
+
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+auto-format = true
+
+[[language]]
+name = "html"
+formatter = { command = 'prettierd', args = [".html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+formatter = { command = 'prettierd', args = [".css"] }
+auto-format = true
+
+[[language]]
+name = "nix"
+formatter = { command = "nixpkgs-fmt" }
+
+[[language]]
+name = "nu"
+auto-format = true
+formatter = { command = "topiary", args = ["format", "--language", "nu"] }
+
+[[grammar]]
+name = "r"
+source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
+
+[language-server.powershell-editor-services]
+name = 'powershell-editor-services'
+transport = 'stdio'
+command = 'pwsh'
+args = [
+  '-NoLogo',
+  '-NoProfile',
+  '-Command',
+  '/home/kmichaels/Software/PowerShellEditorServices/PowerShellEditorServices/Start-EditorServices.ps1 -SessionDetailsPath /home/kmichaels/Software/PowerShellEditorServices/PowerShellEditorServices.sessions.lsp.json -LanguageServiceOnly -Stdio',
+]
+
+[[language]]
+name = 'powershell'
+scope = 'source.ps1'
+file-types = ['ps1', 'psm1', 'psd1']
+roots = ['.git']
+comment-token = '#'
+indent = { tab-width = 4, unit = '    ' }
+language-servers = ['powershell-editor-services']
+formatter = { command = "pwshFmt", args = ["--stdin"] }
+auto-format = false
