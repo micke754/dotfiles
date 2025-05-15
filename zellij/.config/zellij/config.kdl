@@ -300,7 +300,7 @@ copy_command "xsel --clipboard --output" // x11
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-scrollback_editor "/home/kmichaels/.cargo/bin/hx"
+// scrollback_editor "/home/kmichaels/.cargo/bin/hx"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
