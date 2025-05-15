@@ -12,6 +12,10 @@ command = "vale-ls"
 [language-server.markdown-oxide]
 command = "markdown-oxide"
 
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
 [language-server.basedpyright]
 command = "basedpyright-langserver"
 args = ["--stdio"]
@@ -65,7 +69,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["basedpyright", "ruff", "harper-ls"]
+language-servers = ["ty", "ruff", "harper-ls"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = false
 
