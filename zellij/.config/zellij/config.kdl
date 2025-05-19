@@ -300,7 +300,7 @@ copy_command "pbcopy"                     // osx
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-scrollback_editor "/Users/kevinmichael/.cargo/bin/hx"
+// scrollback_editor "/Users/kmichaels/.cargo/bin/hx"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -311,8 +311,8 @@ scrollback_editor "/Users/kevinmichael/.cargo/bin/hx"
 
 // The folder in which Zellij will look for layouts
 //
-layout_dir "/Users/kevinmichael/.config/zellij/layouts"
+layout_dir "/Users/kmichaels/.config/zellij/layouts"
 
 // The folder in which Zellij will look for themes
 //
-theme_dir "/Users/kevinmichael/.config/zellij/themes"
+theme_dir "/Users/kmichaels/.config/zellij/themes"
