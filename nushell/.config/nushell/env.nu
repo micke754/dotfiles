@@ -44,3 +44,35 @@ def --env y [...args] {
   }
   rm -fp $tmp
 }
+
+def --env find-git-status [...args] {
+  # Find all .git directories recursively and get their full paths.
+  # Use `^find` to invoke the external 'find' utility.
+  let git_dirs = (^find . -type d -name ".git" | lines)
+
+  for git_dir in $git_dirs {
+    # Get the parent directory of the .git directory, which is the repository root.
+    let repo_root = ($git_dir | path dirname)
+
+    # Execute 'git status -s' within the repository root's context.
+    # The 'do' block creates a temporary scope where 'cd' changes the directory
+    # only for commands run within that block.
+    # 'str trim' removes leading/trailing whitespace, including newlines,
+    # ensuring accurate checking for non-empty status.
+    let status_output = (
+      do {
+        cd $repo_root
+        git status -s
+      } | str trim
+    )
+
+    # Check if the status output is not empty (i.e., there are changes).
+    # Use `not` directly on the boolean result of `is-empty`.
+    if not ($status_output | is-empty) {
+      # Print an empty line for separation, then the header and the status.
+      print ""
+      print $"GIT STATUS IN ($repo_root)"
+      print $status_output
+    }
+  }
+}
