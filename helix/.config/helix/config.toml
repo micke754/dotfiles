@@ -1,7 +1,7 @@
 # theme = "base16_transparent"
 theme = "peachpuff_custom"
 [editor]
-scrolloff = 15
+# scrolloff = 15
 auto-format = true
 continue-comments = false
 
@@ -37,6 +37,7 @@ enable = false
 # o = ["open_below", "normal_mode"]
 # O = ["open_above", "normal_mode"]
 
+"C-c" = "copy_selection_on_prev_line"
 G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
 "C-b" = []                                   # Unbinds Ctrl-b in normal mode
@@ -68,3 +69,8 @@ V = ["select_mode", "extend_to_line_bounds"]
 
 [keys.normal.space.q]
 "q" = [":quit-all"]
+
+[keys.normal.space.l]
+"s" = [":lsp-stop"]
+"r" = [":lsp-restart"]
+"w" = [":lsp-workspace-command"]
