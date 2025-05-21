@@ -1,0 +1,12 @@
+DYF
+DYP
+Databricks
+DuckDB
+Kenwood
+Nav
+OMRF
+Otago
+PowerBI
+PySpark
+SFF
+yaml
