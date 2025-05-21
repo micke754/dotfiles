@@ -5,3 +5,4 @@ theme = "Oxocarbon"
 fullscreen = true
 window-vsync = true
 title = " "
+gtk-gsk-renderer = "opengl"
