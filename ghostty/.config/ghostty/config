@@ -3,3 +3,5 @@ font-size = 14
 # theme = "Kanagawa Dragon"
 theme = "Oxocarbon"
 fullscreen = true
+window-vsync = true
+title = " "
