@@ -18,17 +18,17 @@
 
 # Paths
 
-$env.PATH = (
-  $env.PATH
-  | append ~/.cargo/bin
-  | append /home/kmichaels/.local/bin
-)
+# $env.PATH = (
+#   $env.PATH
+#   | append ~/.cargo/bin
+#   | append ~/kmichaels/.local/bin
+# )
 
-$env.XDG_CONFIG_HOME = "/home/kmichaels/.config"
+# $env.XDG_CONFIG_HOME = "~/kmichaels/.config"
 
-# Topiary Nushell Fmt
-$env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
-$env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
+# # Topiary Nushell Fmt
+# $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
+# $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
 
 # Yazi Stuff
 def --env y [...args] {
@@ -74,21 +74,19 @@ def --env find-git-status [...args] {
 }
 
 # Aliases
-alias hx = helix
+
+# alias hx = helix
 alias la = uutils-ls -a
 
 $env.config.show_banner = false
-$env.config.buffer_editor = "helix"
+$env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
-$env.EDITOR = "helix"
+$env.EDITOR = "hx"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-
-# Zoxide
-zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
 
 # Zoxide
 source ~/.zoxide.nu
