@@ -122,3 +122,30 @@ def "fgs" [] {
         }
     }
 }
+
+
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell ...$spans | from json
+}
+
+
+let fish_completer = {|spans|
+    fish --command $"complete '--do-complete=($spans | str join ' ')'"
+    | from tsv --flexible --noheaders --no-infer
+    | rename value description
+    | update value {
+        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    }
+}
+
+
+$env.config.completions.external = {
+  completer: $fish_completer
+  enable: true
+  
+}
+$env.config.completions.external = {
+  completer:  $carapace_completer
+  enable:  true
+  
+}
