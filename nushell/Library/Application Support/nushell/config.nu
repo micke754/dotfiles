@@ -76,13 +76,15 @@ def --env find-git-status [...args] {
 # Aliases
 
 # alias hx = helix
-alias la = uutils-ls -a
+alias la = lsd -a
+alias ll = lsd -l
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 $env.EDITOR = "hx"
+$env.NVIM_APPNAME = "hex-vim"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")
@@ -90,3 +92,33 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 
 # Zoxide
 source ~/.zoxide.nu
+
+def "fgs" [] {
+    # Find all .git directories recursively and get their full paths.
+    # Use `^find` to invoke the external 'find' utility.
+    let git_dirs = (^find . -type d -name ".git" | lines)
+
+    for git_dir in $git_dirs {
+        # Get the parent directory of the .git directory, which is the repository root.
+        let repo_root = ($git_dir | path dirname)
+
+        # Execute 'git status -s' within the repository root's context.
+        # The 'do' block creates a temporary scope where 'cd' changes the directory
+        # only for commands run within that block.
+        # 'str trim' removes leading/trailing whitespace, ensuring accurate checking for non-empty status.
+        let status_output = (
+            do {
+                cd $repo_root
+                git status -s
+            } | str trim
+        )
+
+        # Check if the status output is not empty (i.e., there are changes).
+        if not ($status_output | is-empty) {
+            # Print an empty line for separation, then the header and the status.
+            print ""
+            print $"GIT STATUS IN ($repo_root)"
+            print $status_output
+        }
+    }
+}
