@@ -17,10 +17,7 @@
 "ui.statusline.inactive" = { fg = "gray", bg = "black" }
 "ui.help" = { fg = "white", bg = "black" }
 "ui.cursor" = { fg = "light-gray", modifiers = ["reversed"] }
-"ui.cursor.primary" = { fg = "light-gray", modifiers = [
-  "reversed",
-  "slow_blink",
-] }
+"ui.cursor.primary" = { fg = "magenta", modifiers = ["reversed", "slow_blink"] }
 # "ui.cursor.primary" = { fg = "light-gray", modifiers = ["reverse"] }
 "ui.virtual.whitespace" = "light-gray"
 "ui.virtual.jump-label" = { fg = "blue", modifiers = ["bold", "underlined"] }

@@ -12,6 +12,14 @@ command = "vale-ls"
 [language-server.markdown-oxide]
 command = "markdown-oxide"
 
+[language-server.pyrefly]
+command = "pyrefly"
+args = ["lsp"]
+
+[language-server.pyre]
+command = "pyre"
+args = ["persistent"]
+
 [language-server.ty]
 command = "ty"
 args = ["server"]
@@ -69,7 +77,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["ty", "ruff", "harper-ls"]
+language-servers = ["pyright", "ty", "ruff"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = false
 

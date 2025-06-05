@@ -848,7 +848,7 @@ detect_folders = []
 
 [python]
 pyenv_version_name = false
-pyenv_prefix = "pyenv "
+# pyenv_prefix = "pyenv "
 python_binary = [["python"], ["python3"], ["python2"]]
 format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 version_format = "v${raw}"
@@ -866,7 +866,7 @@ detect_files = [
   "__init__.py",
 ]
 detect_folders = []
-detect_env_vars = ["VIRTUAL_ENV"]
+# detect_env_vars = ["VIRTUAL_ENV"]
 
 [quarto]
 format = "via [$symbol($version )]($style)"

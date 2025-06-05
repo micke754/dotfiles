@@ -14,8 +14,10 @@ export EDITOR=helix
 
 # Aliases
 alias ls='ls --color=auto'
+alias la='eza -a'
 alias grep='grep --color=auto'
 alias hx='helix'
+alias cl='clear'
 
 # Starship
 eval "$(starship init bash)"
@@ -35,3 +37,7 @@ function y() {
 
 # PATH
 export PATH="/home/kmichaels/.local/bin:$PATH"
+
+# Set up fzf key bindings and fuzzy completion
+# eval "$(fzf --bash)"
+FZF_ALT_C_COMMAND= eval "$(fzf --bash)"

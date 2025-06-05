@@ -16,6 +16,7 @@
 #
 # You can remove these comments if you want or leave
 
+# Environment Stuff
 # Paths
 
 $env.PATH = (
@@ -75,7 +76,7 @@ def --env find-git-status [...args] {
 
 # Aliases
 alias hx = helix
-alias la = uutils-ls -a
+alias la = eza -a
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "helix"
@@ -174,9 +175,32 @@ def "trigger-and-monitor-pipeline" [
 
   if ($result == "succeeded") {
     echo "Pipeline completed successfully!"
-    # exit 0
+    true
   } else {
     echo "Pipeline finished with a non-success result."
-    # exit 1 # Indicate failure
+    false
   }
+}
+
+# Completions
+let carapace_completer = {|spans|
+  carapace $spans.0 nushell ...$spans | from json
+}
+
+let fish_completer = {|spans|
+  fish --command $"complete '--do-complete=($spans | str join ' ')'"
+  | from tsv --flexible --noheaders --no-infer
+  | rename value description
+  | update value {
+    if ($in | path exists) { $'"($in | str replace "\"" "\\\"")"' } else { $in }
+  }
+}
+
+$env.config.completions.external =  {
+  enable: false
+  completer: $carapace_completer
+}
+$env.config.completions.external =  {
+  enable: true
+  completer: $fish_completer
 }

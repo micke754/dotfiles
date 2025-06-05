@@ -16,3 +16,5 @@
 #
 # You can remove these comments if you want or leave
 # them for future reference.
+
+$env.UV_PYTHON = "python3.12"

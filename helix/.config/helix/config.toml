@@ -1,9 +1,11 @@
-theme = "base16_transparent"
-# theme = "peachpuff_custom"
+# theme = "base16_transparent"
+theme = "peachpuff_custom"
+
 [editor]
 # scrolloff = 15
 auto-format = true
 continue-comments = false
+true-color = true
 
 [editor.cursor-shape]
 insert = "bar"
