@@ -2,7 +2,7 @@
 theme = "peachpuff_custom"
 
 [editor]
-scrolloff = 15
+scrolloff = 25
 auto-format = true
 continue-comments = false
 

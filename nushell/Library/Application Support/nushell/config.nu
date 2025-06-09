@@ -30,6 +30,10 @@
 # $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
 # $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
 
+
+# ~/.config/nushell/env.nu
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
+
 # Yazi Stuff
 def --env y [...args] {
   let tmp = (mktemp -t "yazi-cwd.XXXXXX")
@@ -141,12 +145,12 @@ let fish_completer = {|spans|
 
 $env.config.completions.external = {
   completer: $fish_completer
-  enable: true
+  enable: false
   
 }
 $env.config.completions.external = {
   completer:  $carapace_completer
-  enable:  false
+  enable:  true
   
 }
 
