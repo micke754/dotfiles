@@ -1,11 +1,13 @@
 # theme = "base16_transparent"
-theme = "peachpuff_custom"
+# theme = "peachpuff_custom"
+theme = "vesper"
 
 [editor]
 # scrolloff = 15
 auto-format = true
 continue-comments = false
 true-color = true
+gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers" if needed
 
 [editor.cursor-shape]
 insert = "bar"
@@ -63,8 +65,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 #   ":sh tmux paste-buffer -t right; tmux send-keys -t right Enter",
 # ]
 
-[keys.normal.space]
-"t" = ["yank_to_clipboard", ":sh send-to-zellij"]
+[keys.normal.space.t]
+"s" = ["yank_to_clipboard", ":sh send-to-zellij"]
+"q" = [":quit-all!"]
 
 [keys.normal.space.w]
 "w" = [":write"]

@@ -61,8 +61,8 @@ warning = { fg = "beige" }
 "diagnostic.unnecessary" = { modifiers = ["dim"] }
 "diagnostic.deprecated" = { modifiers = ["crossed_out"] }
 "diagnostic.error" = { underline = { style = "curl", color = "red" } }
-"diagnostic.warning" = { underline = { style = "curl", color = "beige"} }
-"diagnostic.info" = { underline = { style = "curl", color = "white"} }
+"diagnostic.warning" = { underline = { style = "curl", color = "beige" } }
+"diagnostic.info" = { underline = { style = "curl", color = "white" } }
 "diagnostic.hint" = { underline = { style = "curl", color = "gray" } }
 
 # tabstop = { bg = "white" }
@@ -71,7 +71,7 @@ warning = { fg = "beige" }
 # "ui.window" = { bg = "white" }
 
 "ui.popup" = { bg = "dark-gray" }
- 
+
 "ui.selection" = { bg = "bg-selection" }
 
 "ui.help" = { bg = "dark-gray", fg = "beige" }
@@ -103,8 +103,12 @@ warning = { fg = "beige" }
 "ui.cursor.insert" = { bg = "bright-green" }
 "ui.cursorline.primary" = { bg = "dark-gray" }
 "ui.cursorline.secondary" = { bg = "dark-gray" }
-"ui.cursor.primary" = { bg = "cursor", fg = "black" }
+"ui.cursor.primary" = { bg = "cursor", fg = "black", modifiers = [
+  "slow_blink",
+] }
 "ui.cursor" = { fg = "white", modifiers = ["reversed"] }
+
+"ui.cursor.match" = { fg = "beige", underline = { color = "beige", style = "line" } }
 
 [palette]
 red = "#ff8080"

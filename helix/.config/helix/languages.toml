@@ -79,7 +79,7 @@ auto-format = true
 name = "python"
 language-servers = ["pyright", "ty", "ruff"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
-auto-format = false
+auto-format = true
 
 [[language]]
 name = "sql"
@@ -90,8 +90,12 @@ auto-format = true
 [[language]]
 name = "yaml"
 formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
-auto-format = true
-language-servers = ["yaml-language-server", "ansible-language-server"]
+auto-format = false
+language-servers = [
+  "yaml-language-server",
+  "ansible-language-server",
+  "harper-ls",
+]
 
 [[language]]
 name = "markdown"

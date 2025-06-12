@@ -3,12 +3,16 @@ DYP
 Databricks
 DuckDB
 Kenwood
+LLM
+Lakehouse
 Nav
 OMRF
 Otago
 PRD
+PSA
 PowerBI
 PySpark
 SFF
 UAT
+mins
 yaml

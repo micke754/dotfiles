@@ -77,6 +77,12 @@ def --env find-git-status [...args] {
 # Aliases
 alias hx = helix
 alias la = eza -a
+alias bat = bat --decorations never
+alias ga = git add -A
+alias gs = git status
+alias gl = git log --oneline --graph -n 10
+alias gc = git commit -a
+alias gd = git diff
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "helix"
@@ -93,6 +99,14 @@ zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
 
 # Zoxide
 source ~/.zoxide.nu
+
+def "mods-gd-continue" [] {
+  git diff | mods -C "can you generate a commit message for these changes"
+}
+
+def "mods-gd" [] {
+  git diff | mods "can you generate a commit message for these changes"
+}
 
 # Az trigger and monitor pipelines
 
