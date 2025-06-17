@@ -37,6 +37,7 @@ function y() {
 
 # PATH
 export PATH="/home/kmichaels/.local/bin:$PATH"
+export PATH="/home/kmichaels/.cargo/bin:$PATH"
 
 # Set up fzf key bindings and fuzzy completion
 # eval "$(fzf --bash)"
