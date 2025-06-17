@@ -76,7 +76,7 @@ def --env find-git-status [...args] {
 }
 
 # Aliases
-alias hx = helix
+# alias hx = helix
 alias la = eza -a
 alias bat = bat --decorations never
 alias ga = git add -A
@@ -86,10 +86,10 @@ alias gc = git commit -a
 alias gd = git diff
 
 $env.config.show_banner = false
-$env.config.buffer_editor = "helix"
+$env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
-$env.EDITOR = "helix"
+$env.EDITOR = "hx"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")

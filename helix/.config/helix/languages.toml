@@ -54,9 +54,9 @@ args = ["--server"]
 command = "sqls"
 args = ["--server"]
 
-[language-server.sqlfluff]
-command = "sqlfluff"
-args = ["lint", "--dialect", "databricks"]
+# [language-server.sqlfluff]
+# command = "sqlfluff"
+# args = ["lint", "--dialect", "databricks"]
 
 # Language Config
 [[language]]
@@ -86,8 +86,13 @@ auto-format = true
 
 [[language]]
 name = "sql"
-language-servers = ["buffer-language-server", "sqlfluff"]
-formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
+file-types = ["sql", "plsql"]
+language-servers = ["buffer-language-server"]
+formatter = { command = "sqlfmt", args = [
+  "--stdin-filename",
+  "$FILENAME",
+  "-",
+] }
 auto-format = true
 
 [[language]]
