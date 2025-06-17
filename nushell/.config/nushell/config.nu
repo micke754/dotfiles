@@ -101,11 +101,17 @@ zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
 source ~/.zoxide.nu
 
 def "mods-gd-continue" [] {
-  git diff | mods -C "can you generate a commit message for these changes"
+  git diff
+  | mods -C "Generate a commit message for these changes; don't use backticks and do not add an explanation"
+  | str trim
+  | xsel --clipboard
 }
 
 def "mods-gd" [] {
-  git diff | mods "can you generate a commit message for these changes"
+  git diff
+  | mods "Generate a commit message for these changes; don't use backticks and do not add an explanation"
+  | str trim
+  | xsel --clipboard
 }
 
 # Az trigger and monitor pipelines

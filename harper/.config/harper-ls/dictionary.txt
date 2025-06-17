@@ -6,6 +6,8 @@ Kenwood
 LLM
 Lakehouse
 Nav
+Ngā
+Nushell
 OMRF
 Otago
 PRD
@@ -13,6 +15,13 @@ PSA
 PowerBI
 PySpark
 SFF
+Tmux
 UAT
+VSCode
+Zellij
+kōrua
+mihi
 mins
+nui
+ora
 yaml

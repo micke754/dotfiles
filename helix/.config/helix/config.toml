@@ -1,6 +1,4 @@
-# theme = "base16_transparent"
-# theme = "peachpuff_custom"
-theme = "vesper"
+theme = "carbonfox"
 
 [editor]
 # scrolloff = 15
@@ -68,6 +66,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 [keys.normal.space.t]
 "s" = ["yank_to_clipboard", ":sh send-to-zellij"]
 "q" = [":quit-all!"]
+[keys.normal.space.t.c]
+"r" = [":config-reload"]
+"o" = [":config-open"]
 
 [keys.normal.space.w]
 "w" = [":write"]
