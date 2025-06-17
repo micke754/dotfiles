@@ -42,3 +42,5 @@ export PATH="/home/kmichaels/.cargo/bin:$PATH"
 # Set up fzf key bindings and fuzzy completion
 # eval "$(fzf --bash)"
 FZF_ALT_C_COMMAND= eval "$(fzf --bash)"
+
+source '/home/kmichaels/.bash_completions/sqlfmt.sh'

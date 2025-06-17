@@ -103,14 +103,14 @@ source ~/.zoxide.nu
 
 def "mods-gd-continue" [] {
   git diff
-  | mods -C "Generate a commit message for these changes; don't use backticks and do not add an explanation"
+  | mods -C "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
 }
 
 def "mods-gd" [] {
   git diff
-  | mods "Generate a commit message for these changes; don't use backticks and do not add an explanation"
+  | mods "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
 }
