@@ -18,11 +18,11 @@
 
 # Paths
 
-# $env.PATH = (
-#   $env.PATH
-#   | append ~/.cargo/bin
-#   | append ~/kmichaels/.local/bin
-# )
+$env.PATH = (
+  $env.PATH
+  | append ~/.cargo/bin
+  | append ~/.local/bin
+)
 
 # $env.XDG_CONFIG_HOME = "~/kmichaels/.config"
 
@@ -82,6 +82,11 @@ def --env find-git-status [...args] {
 # alias hx = helix
 alias la = lsd -a
 alias ll = lsd -l
+alias gc = git commit -a
+alias ga = git add -A
+alias gl = git log --oneline --graph -n 10
+alias gs = git status 
+alias gd = git diff 
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
@@ -240,4 +245,18 @@ def "trigger-and-monitor-pipeline" [
     echo "Pipeline finished with a non-success result."
     # exit 1 # Indicate failure
   }
+}
+
+def "mods-gd-continue" [] {
+  git diff
+  | mods -C "Generate a commit message for these changes; don't use backticks"
+  | str trim
+  | pbcopy
+}
+
+def "mods-gd" [] {
+  git diff
+  | mods "Generate a commit message for these changes; don't use backticks"
+  | str trim
+  | pbcopy
 }

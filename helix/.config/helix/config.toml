@@ -44,16 +44,16 @@ enable = false
 # "}" = ["goto_next_paragraph", "collapse_selection"]
 
 "%" = "select_all"
-C-y = [
-  ':sh rm -f /tmp/unique-file',
-  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
-  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-  ':open %sh{cat /tmp/unique-file}',
-  ':redraw',
-]
+# C-y = [
+#   ':sh rm -f /tmp/unique-file',
+#   ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+#   ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+#   ':open %sh{cat /tmp/unique-file}',
+#   ':redraw',
+# ]
 G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
-"C-b" = [] # Unbinds Ctrl-b in normal mode
+"C-b" = []                                   # Unbinds Ctrl-b in normal mode
 
 [keys.insert]
 "C-y" = ["completion"]
@@ -70,8 +70,8 @@ V = ["select_mode", "extend_to_line_bounds"]
 #   ":sh tmux paste-buffer -t right; tmux send-keys -t right Enter",
 # ]
 
-[keys.normal.space]
-"t" = ["yank_to_clipboard", ":sh send-to-pane-zellij"]
+# [keys.normal.space]
+# "t" = ["yank_to_clipboard", ":sh send-to-pane-zellij"]
 
 [keys.normal.space.w]
 "w" = [":write"]

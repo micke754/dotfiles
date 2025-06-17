@@ -1,4 +1,7 @@
 # LSP Server Config
+[language-server.buffer-language-server]
+command = "buffer-language-server"
+
 [language-server.harper-ls]
 command = "harper-ls"
 args = ["--stdio"]
@@ -54,7 +57,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["ty", "pyright", "ruff"]
+language-servers = ["buffer-language-server", "ty", "pyright", "ruff"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
@@ -75,7 +78,12 @@ language-servers = ["yaml-language-server", "ansible-language-server"]
 [[language]]
 name = "markdown"
 file-types = ["md"]
-language-servers = ["harper-ls", "vale-ls", "markdown-oxide"]
+language-servers = [
+  "buffer-language-server",
+  "harper-ls",
+  "vale-ls",
+  "markdown-oxide",
+]
 
 [[language]]
 name = "lua"
@@ -111,7 +119,7 @@ formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
 name = "nu"
-formatter = { command = "nufmt", args = ["--stdin-filename", "$FILENAME", "-"] }
+# formatter = { command = "nufmt", args = ["--stdin-filename", "$FILENAME", "-"] }
 
 [[grammar]]
 name = "r"
