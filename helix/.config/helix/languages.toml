@@ -1,4 +1,7 @@
 # LSP Server Config
+[language-server.buffer-language-server]
+command = "buffer-language-server"
+
 [language-server.ccls-ls]
 command = "ccls"
 
@@ -77,13 +80,13 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["pyright", "ty", "ruff"]
+language-servers = ["pyright", "ty", "ruff", "buffer-language-server"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
 [[language]]
 name = "sql"
-language-servers = ["sqlfluff"]
+language-servers = ["buffer-language-server", "sqlfluff"]
 formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
 auto-format = true
 
@@ -99,7 +102,12 @@ language-servers = [
 
 [[language]]
 name = "markdown"
-language-servers = ["markdown-oxide", "vale-ls", "harper-ls"]
+language-servers = [
+  "buffer-language-server",
+  "markdown-oxide",
+  "vale-ls",
+  "harper-ls",
+]
 
 [[language]]
 name = "lua"

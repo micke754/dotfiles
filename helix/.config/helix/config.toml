@@ -46,6 +46,7 @@ V = ["select_mode", "extend_to_line_bounds"]
 "C-n" = ["move_line_down"]
 "C-p" = ["move_line_up"]
 # m = "select_mode"
+"X" = "extend_line_above"
 "%" = "select_all"
 
 [keys.insert]
@@ -66,6 +67,7 @@ V = ["select_mode", "extend_to_line_bounds"]
 [keys.normal.space.t]
 "s" = ["yank_to_clipboard", ":sh send-to-zellij"]
 "q" = [":quit-all!"]
+
 [keys.normal.space.t.c]
 "r" = [":config-reload"]
 "o" = [":config-open"]
