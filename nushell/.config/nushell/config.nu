@@ -103,21 +103,21 @@ source ~/.zoxide.nu
 
 def "mods-gd-continue" [] {
   git diff
-  | mods --model lite -C "Generate a commit message for these changes; don't use backticks"
+  | mods --model flash -C "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
 }
 
 def "mods-gd" [] {
   git diff
-  | mods --model lite "Generate a commit message for these changes; don't use backticks"
+  | mods --model flash "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
 }
 
 def "gc" [] {
   git diff
-  | mods --model lite "Generate a commit message for these changes; don't use backticks"
+  | mods --model flash "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard;
   git commit -a
