@@ -82,7 +82,7 @@ alias bat = bat --decorations never
 alias ga = git add -A
 alias gs = git status
 alias gl = git log --oneline --graph -n 10
-alias gc = git commit -a
+# alias gc = git commit -a
 alias gd = git diff
 
 $env.config.show_banner = false
@@ -103,16 +103,24 @@ source ~/.zoxide.nu
 
 def "mods-gd-continue" [] {
   git diff
-  | mods -C "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite -C "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
 }
 
 def "mods-gd" [] {
   git diff
-  | mods "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite "Generate a commit message for these changes; don't use backticks"
   | str trim
   | xsel --clipboard
+}
+
+def "gc" [] {
+  git diff
+  | mods --model lite "Generate a commit message for these changes; don't use backticks"
+  | str trim
+  | xsel --clipboard;
+  git commit -a
 }
 
 # Az trigger and monitor pipelines
