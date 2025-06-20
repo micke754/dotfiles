@@ -123,6 +123,14 @@ def "gc" [] {
   git commit -a
 }
 
+def "ms" [] {
+  mods --list; mods --show (xsel --clipboard) | hx
+}
+
+def "msl" [] {
+  mods --show-last | save --force mods-chat.md; hx "mods-chat.md"
+}
+
 # Az trigger and monitor pipelines
 
 def "trigger-and-monitor-pipeline" [
