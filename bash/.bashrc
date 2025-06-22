@@ -44,3 +44,6 @@ export PATH="/home/kmichaels/.cargo/bin:$PATH"
 FZF_ALT_C_COMMAND= eval "$(fzf --bash)"
 
 source '/home/kmichaels/.bash_completions/sqlfmt.sh'
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

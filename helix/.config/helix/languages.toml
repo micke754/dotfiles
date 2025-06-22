@@ -54,6 +54,15 @@ args = ["--server"]
 command = "sqls"
 args = ["--server"]
 
+
+
+[[language]]
+name = "go"
+# language-servers = ["gopls"]
+# file-types = ["c", "h"]
+formatter = { command = "goimports" }
+auto-format = true
+
 # [language-server.sqlfluff]
 # command = "sqlfluff"
 # args = ["lint", "--dialect", "databricks"]
