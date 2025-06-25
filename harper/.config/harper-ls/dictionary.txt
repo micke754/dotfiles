@@ -5,6 +5,7 @@ DuckDB
 Kenwood
 LLM
 Lakehouse
+LangChain
 Nav
 Ngā
 Nushell
@@ -15,6 +16,7 @@ PSA
 PowerBI
 PySpark
 SFF
+TLDR
 Tmux
 UAT
 VSCode

@@ -24,6 +24,7 @@ $env.PATH = (
   | append ~/.cargo/bin
   | append /home/kmichaels/.local/bin
   | append /home/kmichaels/Bash-Scripts
+  # | append /home/kmichaels/Open-Source/Mods/dist
 )
 
 $env.XDG_CONFIG_HOME = "/home/kmichaels/.config"
@@ -103,21 +104,42 @@ source ~/.zoxide.nu
 
 def "mods-gd-continue" [] {
   git diff
-  | mods --model lite -C "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite -C """
+  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+  """
   | str trim
   | xsel --clipboard
 }
 
 def "mods-gd" [] {
   git diff
-  | mods --model lite "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite """
+  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+  """
   | str trim
   | xsel --clipboard
 }
 
 def "gc" [] {
   git diff
-  | mods --model lite "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite """
+  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+  """
   | str trim
   | xsel --clipboard;
   git commit -a
@@ -132,7 +154,7 @@ def "ms" [] {
 }
 
 def "msl" [] {
-  mods --show-last | save --force mods-chat.md; hx "mods-chat.md"
+  mods --show-last; mods --show (xsel --clipboard) | hx
 }
 
 # Az trigger and monitor pipelines

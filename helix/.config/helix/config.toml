@@ -1,4 +1,5 @@
-theme = "carbonfox"
+theme = "catppuccin_mocha"
+# theme = "carbonfox"
 
 [editor]
 # scrolloff = 15
