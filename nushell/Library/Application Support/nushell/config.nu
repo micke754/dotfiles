@@ -247,16 +247,43 @@ def "trigger-and-monitor-pipeline" [
   }
 }
 
-def "mods-gd-continue" [] {
+def "mods-gd" [] {
   git diff
-  | mods -C "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite """
+  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+  """
   | str trim
   | pbcopy
 }
 
-def "mods-gd" [] {
+def "gc" [] {
   git diff
-  | mods "Generate a commit message for these changes; don't use backticks"
+  | mods --model lite """
+  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+  """
   | str trim
-  | pbcopy
+  | pbcopy;
+  git commit -a
+}
+
+def "mc" [] {
+  mods --list; mods --continue (pbcopy)
+}
+
+def "ms" [] {
+  mods --list; mods --show (pbcopy) | hx
+}
+
+def "msl" [] {
+  mods --show-last; mods --show (pbcopy) | hx
 }
