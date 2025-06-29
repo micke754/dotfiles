@@ -249,7 +249,7 @@ def "trigger-and-monitor-pipeline" [
 
 def "mods-gd" [] {
   git diff
-  | mods --model lite """
+  | mods --no-cache --quiet --temp 0.5 --model lite """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -263,7 +263,7 @@ def "mods-gd" [] {
 
 def "gc" [] {
   git diff
-  | mods --model lite """
+  | mods --no-cache --quiet --temp 0.5 --model lite """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
