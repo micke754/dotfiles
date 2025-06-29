@@ -2,9 +2,10 @@
 theme = "peachpuff_custom"
 
 [editor]
-scrolloff = 25
+# scrolloff = 25
 auto-format = true
 continue-comments = false
+gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers" if needed
 
 [editor.cursor-shape]
 insert = "bar"
