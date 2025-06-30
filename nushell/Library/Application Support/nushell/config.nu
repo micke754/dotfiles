@@ -22,6 +22,7 @@ $env.PATH = (
   $env.PATH
   | append ~/.cargo/bin
   | append ~/.local/bin
+  | append ~/Bash-Scripts
 )
 
 # $env.XDG_CONFIG_HOME = "~/kmichaels/.config"
