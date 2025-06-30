@@ -55,7 +55,6 @@ command = "sqls"
 args = ["--server"]
 
 
-
 [[language]]
 name = "go"
 # language-servers = ["gopls"]
@@ -91,11 +90,12 @@ auto-format = true
 name = "python"
 language-servers = ["pyright", "ty", "ruff", "buffer-language-server"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
-auto-format = true
+auto-format = false
 
 
 [[language]]
 name = "yaml"
+file-types = ['yml', 'yaml']
 formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
 auto-format = false
 language-servers = [

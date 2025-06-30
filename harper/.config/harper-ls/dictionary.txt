@@ -21,6 +21,7 @@ Tmux
 UAT
 VSCode
 Zellij
+haha
 kōrua
 mihi
 mins

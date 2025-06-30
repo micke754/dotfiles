@@ -1,5 +1,4 @@
-theme = "catppuccin_mocha"
-# theme = "carbonfox"
+theme = "base16_transparent" # good default base16_transparent
 
 [editor]
 # scrolloff = 15
