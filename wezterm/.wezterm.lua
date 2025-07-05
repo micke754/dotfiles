@@ -12,10 +12,13 @@ local config = wezterm.config_builder()
 
 -- or, changing the font size and color scheme.
 config.font_size = 16
+
 config.font = wezterm.font("FiraCode Nerd Font Propo")
 -- config.font = wezterm.font("IosevkaTerm Nerd Font Propo")
--- config.color_scheme = "kanagawabones"
-config.color_scheme = "Oxocarbon Dark (Gogh)"
+
+-- config.color_scheme = "Rosé Pine (base16)"
+config.color_scheme = "rose-pine"
+
 -- Window decorations
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true

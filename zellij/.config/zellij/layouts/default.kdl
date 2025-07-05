@@ -84,7 +84,7 @@ layout {
 
             // Add these lines to your default.kdl layout file
             command_calendar_command     "/Users/kmichaels/.config/zellij/scripts/get-calendar-ical.sh"
-            command_calendar_format      "#[fg=$cyan]{stdout} "
+            command_calendar_format      "#[fg=$white]{stdout} "
             command_calendar_interval    "900" // 900 seconds = 15 minutes
             command_calendar_rendermode  "static"
 
