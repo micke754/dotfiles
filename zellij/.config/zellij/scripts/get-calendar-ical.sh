@@ -2,7 +2,7 @@
 
 # Run the ical-buddy command and store its output in a variable
 # ==> REPLACE THE COMMAND BELOW WITH YOUR OWN <==
-EVENT_OUTPUT=$(icalBuddy -ic "kevin.vncnt@gmail.com, Week Plan" -li 1 -n -nc -nrd -ss "" -ps "/ /" -po "title,datetime" -tf "%H:%M" eventsToday)
+EVENT_OUTPUT=$(icalBuddy -ic "kevin.vncnt@gmail.com, AI Assistant Shedule" -li 1 -n -nc -nrd -ss "" -ps "/ /" -po "title,datetime" -tf "%H:%M" eventsToday)
 
 # Check if the output is empty
 if [ -z "$EVENT_OUTPUT" ]; then
