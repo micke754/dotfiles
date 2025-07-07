@@ -30,8 +30,8 @@ command = "vale-ls"
 command = "basedpyright-langserver"
 args = ["--stdio"]
 
-# [language-server.basedpyright.config.python.analysis]
-# typeCheckingMode = "basic"
+[language-server.basedpyright.config.python.analysis]
+typeCheckingMode = "off"
 
 [language-server.pyright]
 command = "pyright-langserver"
@@ -45,9 +45,9 @@ typeCheckingMode = "basic"
 command = "ruff"
 args = ["server"]
 
-[language-server.pylyzer]
-command = "pylyzer"
-args = ["--server"]
+[language-server.ty]
+command = "ty"
+args = ["server"]
 
 [language-server.gpt]
 command = "helix-gpt --handler=codeium"
@@ -71,7 +71,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["scls", "pyright", "ty", "ruff"]
+language-servers = ["scls", "basedpyright", "ty"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
