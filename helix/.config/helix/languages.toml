@@ -26,6 +26,10 @@ command = "markdown-oxide"
 [language-server.vale-ls]
 command = "vale-ls"
 
+[language-server.pyrefly]
+command = "pyrefly"
+args = ["lsp"]
+
 [language-server.basedpyright]
 command = "basedpyright-langserver"
 args = ["--stdio"]
@@ -71,7 +75,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["scls", "basedpyright", "ty"]
+language-servers = ["scls", "basedpyright", "ty", "ruff"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
