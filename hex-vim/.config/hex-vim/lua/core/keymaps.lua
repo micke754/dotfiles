@@ -23,4 +23,4 @@ vim.keymap.set("n", "gs", "0", { noremap = true, desc = "Scroll to end" })
 vim.keymap.set("n", "gl", "$", { noremap = true, desc = "Scroll to end" })
 
 -- Searching
-vim.keymap.set("n", "<Space>/", ":noh<CR>", { noremap = true, desc = "Clear search highlighting" })
+vim.keymap.set("n", "<Esc>", ":noh<CR>", { noremap = true, desc = "Clear search highlighting" })
