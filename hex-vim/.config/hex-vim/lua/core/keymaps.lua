@@ -19,6 +19,8 @@ vim.keymap.set("n", "<Space>ww", ":w<CR>", { noremap = true, desc = "Save buffer
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, desc = "Scroll down and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, desc = "Scroll up and center" })
 vim.keymap.set("n", "ge", "G", { noremap = true, desc = "Scroll to end" })
+vim.keymap.set("n", "gs", "0", { noremap = true, desc = "Scroll to end" })
+vim.keymap.set("n", "gl", "$", { noremap = true, desc = "Scroll to end" })
 
 -- Searching
 vim.keymap.set("n", "<Space>/", ":noh<CR>", { noremap = true, desc = "Clear search highlighting" })

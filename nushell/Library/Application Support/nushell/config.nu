@@ -152,12 +152,12 @@ let fish_completer = {|spans|
 
 $env.config.completions.external = {
   completer: $fish_completer
-  enable: false
+  enable: true
   
 }
 $env.config.completions.external = {
   completer:  $carapace_completer
-  enable:  true
+  enable:  false
   
 }
 
