@@ -95,7 +95,7 @@ $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 $env.EDITOR = "hx"
-$env.NVIM_APPNAME = "hex-vim"
+# $env.NVIM_APPNAME = "hex-vim"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")
