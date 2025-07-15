@@ -137,7 +137,30 @@ def "mods-gd" [] {
 }
 
 def "gc" [] {
-  git diff
+  # Get staged and unstaged changes
+  let diff_output = (git diff HEAD)
+
+  # Get untracked files
+  let untracked = (git ls-files --others --exclude-standard)
+
+  # Combine diff and untracked info for commit message generation
+  let input_for_mods = if ($diff_output | is-empty) {
+    if ($untracked | is-empty) {
+      ""
+    } else {
+      $"Untracked files:\n($untracked | str join '\n')"
+    }
+  } else {
+    $diff_output
+  }
+
+  if ($input_for_mods == "") {
+    echo "No changes to commit."
+    
+  }
+
+  # Generate commit message
+  echo $input_for_mods
   | mods --model lite --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
@@ -147,7 +170,9 @@ def "gc" [] {
     [optional footer(s)]
   """
   | str trim
-  | xsel --clipboard;
+  | xsel --clipboard
+
+  # Run git commit with all changes staged
   git commit -a
 }
 
