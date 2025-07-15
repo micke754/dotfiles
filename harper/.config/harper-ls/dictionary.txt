@@ -2,6 +2,7 @@ DYF
 DYP
 Databricks
 DuckDB
+Gio
 Kenwood
 LLM
 Lakehouse
@@ -9,6 +10,7 @@ LangChain
 Nav
 Ngā
 Nushell
+Nā
 OMRF
 Otago
 PRD
@@ -27,4 +29,5 @@ mihi
 mins
 nui
 ora
+vdirsyncer
 yaml

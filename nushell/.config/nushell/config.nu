@@ -24,8 +24,11 @@ $env.PATH = (
   | append ~/.cargo/bin
   | append /home/kmichaels/.local/bin
   | append /home/kmichaels/Bash-Scripts
+  | append /home/kmichaels/.bun/bin
   # | append /home/kmichaels/Open-Source/Mods/dist
 )
+# Helps gpg to know what prompt to use
+$env.GPG_TTY = (tty)
 
 $env.XDG_CONFIG_HOME = "/home/kmichaels/.config"
 
@@ -85,6 +88,9 @@ alias gs = git status
 alias gl = git log --oneline --graph -n 10
 # alias gc = git commit -a
 alias gd = git diff
+alias npl = nix profile list
+
+# alias gemini = npx https://github.com/google-gemini/gemini-cli
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
@@ -118,7 +124,7 @@ def "mods-gd-continue" [] {
 
 def "mods-gd" [] {
   git diff
-  | mods --model lite """
+  | mods --model lite --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -132,7 +138,7 @@ def "mods-gd" [] {
 
 def "gc" [] {
   git diff
-  | mods --model lite """
+  | mods --model lite --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -156,6 +162,21 @@ def "ms" [] {
 def "msl" [] {
   mods --show-last; mods --show (xsel --clipboard) | hx
 }
+
+def "agenda" [] {
+  gcalcli agenda now | tail -n +3 | str trim | head -n 7
+}
+
+def nix-replace [
+  flake_dir: string
+] {
+  nix profile remove $"($flake_dir)"  | tee { print } | complete
+  nix profile install $"($flake_dir)/"  | tee { print } | complete
+  nix-collect-garbage | tee { print } | complete
+
+  print "SUCCESS: Profile replaced and garbage collected."
+}
+
 
 # Az trigger and monitor pipelines
 
