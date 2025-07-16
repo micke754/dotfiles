@@ -3,18 +3,12 @@
 # Installed by:
 # version = "0.104.0"
 #
-# This file is used to override default Nushell settings, define
-# (or import) custom commands, or run any other startup tasks.
-# See https://www.nushell.sh/book/configuration.html
-#
 # This file is loaded after env.nu and before login.nu
 #
 # You can open this file in your default editor using:
 # config nu
 #
 # See `help config nu` for more options
-#
-# You can remove these comments if you want or leave
 
 # Paths
 
@@ -33,8 +27,6 @@ $env.PATH = (
 # $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
 
 
-# ~/.config/nushell/env.nu
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
 
 # Yazi Stuff
 def --env y [...args] {
@@ -82,13 +74,15 @@ def --env find-git-status [...args] {
 # Aliases
 
 # alias hx = helix
+alias bat = bat --decorations never
 alias la = lsd -a
+alias lt = lsd --tree --depth 2
 alias ll = lsd -l
-alias gc = git commit -a
 alias ga = git add -A
 alias gl = git log --oneline --graph -n 10
 alias gs = git status 
 alias gd = git diff 
+alias npl = nix profile list
 
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
@@ -135,31 +129,7 @@ def "fgs" [] {
 }
 
 
-let carapace_completer = {|spans|
-    carapace $spans.0 nushell ...$spans | from json
-}
 
-
-let fish_completer = {|spans|
-    fish --command $"complete '--do-complete=($spans | str join ' ')'"
-    | from tsv --flexible --noheaders --no-infer
-    | rename value description
-    | update value {
-        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
-    }
-}
-
-
-$env.config.completions.external = {
-  completer: $fish_completer
-  enable: true
-  
-}
-$env.config.completions.external = {
-  completer:  $carapace_completer
-  enable:  false
-  
-}
 
 # Az trigger and monitor pipelines
 
@@ -169,6 +139,7 @@ def "trigger-and-monitor-pipeline" [
   --debug # Optional: Enable debug logging for Azure CLI commands
   --parameters: list<string> = [] # Optional: List of pipeline parameters (e.g., ["key1=value1", "key2=value2"])
 ] {
+
   # Store the start time for duration calculation
   let start_time = (date now)
 
@@ -264,8 +235,31 @@ def "mods-gd" [] {
 }
 
 def "gc" [] {
-  git diff
-  | mods --no-cache --quiet --temp 0.5 --model lite """
+  # Get staged and unstaged changes
+  let diff_output = (git diff HEAD)
+
+  # Get untracked files
+  let untracked = (git ls-files --others --exclude-standard)
+
+  # Combine diff and untracked info for commit message generation
+  let input_for_mods = if ($diff_output | is-empty) {
+    if ($untracked | is-empty) {
+      ""
+    } else {
+      $"Untracked files:\n($untracked | str join '\n')"
+    }
+  } else {
+    $diff_output
+  }
+
+  if ($input_for_mods == "") {
+    echo "No changes to commit."
+    
+  }
+
+  # Generate commit message
+  echo $input_for_mods
+  | mods --model lite --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -274,9 +268,12 @@ def "gc" [] {
     [optional footer(s)]
   """
   | str trim
-  | pbcopy;
+  | pbcopy --clipboard
+
+  # Run git commit with all changes staged
   git commit -a
 }
+
 
 def "mc" [] {
   mods --list; mods --continue (pbcopy)
@@ -288,4 +285,42 @@ def "ms" [] {
 
 def "msl" [] {
   mods --show-last; mods --show (pbcopy) | hx
+}
+
+def nix-replace [
+  flake_dir: string
+] {
+  nix profile remove $"($flake_dir)"  | tee { print } | complete
+  nix profile install $"($flake_dir)/"  | tee { print } | complete
+  nix-collect-garbage | tee { print } | complete
+
+  print "SUCCESS: Profile replaced and garbage collected."
+}
+
+# Completions
+
+# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
+let carapace_completer = {|spans|
+    carapace $spans.0 nushell ...$spans | from json
+}
+
+let fish_completer = {|spans|
+    fish --command $"complete '--do-complete=($spans | str join ' ')'"
+    | from tsv --flexible --noheaders --no-infer
+    | rename value description
+    | update value {
+        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    }
+}
+
+$env.config.completions.external = {
+  completer: $fish_completer
+  enable: true
+  
+}
+
+$env.config.completions.external = {
+  completer:  $carapace_completer
+  enable:  false
+  
 }
