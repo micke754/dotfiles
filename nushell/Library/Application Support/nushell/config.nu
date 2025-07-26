@@ -287,11 +287,18 @@ def "msl" [] {
   mods --show-last; mods --show (pbcopy) | hx
 }
 
-def nix-replace [
+def nix-profile-replace [
   flake_dir: string
 ] {
-  nix profile remove $"($flake_dir)"  | tee { print } | complete
-  nix profile install $"($flake_dir)/"  | tee { print } | complete
+  let clean_name: string = ($flake_dir | str trim --right --char "/")
+
+  print $"Removing profile: ($clean_name)"
+  nix profile remove $clean_name | tee { print } | complete
+
+  print $"Installing from ($clean_name)/"
+  nix profile install $"(clean_name)/"  | tee { print } | complete
+  
+  print $"Running garbage collection..."
   nix-collect-garbage | tee { print } | complete
 
   print "SUCCESS: Profile replaced and garbage collected."
