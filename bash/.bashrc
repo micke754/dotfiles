@@ -10,7 +10,7 @@ PS1='[\u@\h \W]\$ '
 
 # Environment variables
 export EDITOR=helix
-export GEMINI_API_KEY=$(pass google/gemini-api-key)
+# export GEMINI_API_KEY=$(pass google/gemini-api-key)
 
 # Aliases
 alias ls='ls --color=auto'

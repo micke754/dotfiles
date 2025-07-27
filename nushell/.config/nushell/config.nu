@@ -137,6 +137,41 @@ def "mods-gd" [] {
 }
 
 def "gc" [] {
+  # Checking if gitleaks is installed
+  if (which gitleaks | is-empty ) {
+    print "⚠️ gitleaks not found"
+    return
+  }
+
+  let is_leaked = (
+    try {
+      let result = gitleaks detect --verbose --exit-code 1 | complete
+      if $result.exit_code == 1 {
+        true # Secrets found
+      } else if $result.exit_code == 0 {
+        false # No secrets detected
+      } else {
+        print "❌ Gitleaks command failed"
+        return
+      }
+    } catch {
+      print "❌ Error running gitleaks"
+      return
+    }
+  )
+
+  if $is_leaked == true {
+    print "❌ Gitleaks detected potential secrets. Commit aborted for security."
+    print "Run 'gitleaks detect --verbose' to see details."
+    return
+   
+  } else if $is_leaked == false {
+    print "✅ Gitleaks scan passed - no secrets detected."
+  } else {
+    return
+  }
+  
+  
   # Get staged and unstaged changes
   let diff_output = (git diff HEAD)
 
@@ -155,25 +190,43 @@ def "gc" [] {
   }
 
   if ($input_for_mods == "") {
-    echo "No changes to commit."
+    print "No changes to commit."
     
   }
 
+
   # Generate commit message
-  echo $input_for_mods
+  $input_for_mods
   | mods --model lite --no-cache """
-  Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
-    <type>[optional scope]: <description>
+  Generate a conventional commit message for these changes. Use this format:
 
-    [optional body]
+  <type>[optional scope]: <description>
 
-    [optional footer(s)]
+  Guidelines:
+  - type: feat, fix, docs, style, refactor, perf, test, chore, ci
+  - scope: optional, indicates what part of codebase (e.g., auth, api, ui)
+  - description: imperative mood, lowercase, no period at end
+  - Keep first line under 50 characters
+  - Add body if changes need explanation
+  - Add footer for breaking changes: 'BREAKING CHANGE: description'
+
+  Examples:
+  feat(auth): add OAuth2 login support
+  fix: resolve memory leak in user session
+  docs: update installation instructions
   """
   | str trim
   | xsel --clipboard
 
   # Run git commit with all changes staged
   git commit -a
+
+  # Add typing practice
+  print "\n🎯 Time for some typing practice!"
+  print "Complete 25 English n-grams:"
+  sleep 1sec
+  ttyper -l english-ngrams -w 25
+  
 }
 
 def "mc" [] {
@@ -206,21 +259,17 @@ def nix-replace [
 # Az trigger and monitor pipelines
 
 def "trigger-and-monitor-pipeline" [
-  pipeline_name: string # The name of the Azure DevOps pipeline
-  branch_name: string # The branch to trigger the pipeline on
-  --debug # Optional: Enable debug logging for Azure CLI commands
-  --parameters: list<string> = [] # Optional: List of pipeline parameters (e.g., ["key1=value1", "key2=value2"])
+  pipeline_name: string
+  branch_name: string
+  --debug
+  --parameters: list<string> = []
 ] {
-  # Store the start time for duration calculation
   let start_time = (date now)
-
   echo $"Triggering pipeline: ($pipeline_name) on branch ($branch_name)..."
 
-  # Build optional flags for 'az pipelines run'
   let debug_flag = if $debug { ["--debug"] } else { [] }
   let params_flags = if (not ($parameters | is-empty)) { ["--parameters"] | append $parameters } else { [] }
 
-  # Execute 'az pipelines run' with conditional flags
   let run_output = (
     try {
       az pipelines run --name $pipeline_name --branch $branch_name ...$debug_flag ...$params_flags --output json | from json
@@ -229,6 +278,11 @@ def "trigger-and-monitor-pipeline" [
       exit 1
     }
   )
+
+  if ($run_output == nothing) {
+    echo $"Error: Failed to trigger pipeline. Branch ($branch_name) may not exist or other error occurred."
+    exit 1
+  }
 
   let run_id = $run_output.id
   let run_web_url = $run_output.url
@@ -246,19 +300,18 @@ def "trigger-and-monitor-pipeline" [
   mut result = "unknown"
 
   while ($status != "completed" and $status != "cancelling") {
-    echo $"Checking status of run ($run_id)" # Print without newline
+    echo $"Checking status of run ($run_id)"
     for _ in 1..3 {
-      print -n "." # Add dots for visual feedback
+      print -n "."
       sleep 0.5sec
     }
-    print "" # Newline after dots
+    print ""
 
     let current_run_details = (
       try {
         ^az pipelines runs show --id $run_id ...$debug_flag --query '{status:status, result:result}' -o json | from json
       } catch {
         echo "Error: Azure CLI command failed or returned invalid JSON for checking status."
-        # exit 1
       }
     )
 
@@ -270,9 +323,8 @@ def "trigger-and-monitor-pipeline" [
       echo $"Final Result: ($result)"
     }
 
-    # Only sleep if the pipeline is not yet completed or cancelling
     if ($status != "completed" and $status != "cancelling") {
-      sleep 15sec # Wait for 15 seconds before checking again
+      sleep 15sec
     }
   }
 
