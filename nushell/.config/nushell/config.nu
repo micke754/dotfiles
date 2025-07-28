@@ -86,8 +86,6 @@ alias bat = bat --decorations never
 alias ga = git add -A
 alias gs = git status
 alias gl = git log --oneline --graph -n 10
-alias practice = ttyper -l english-ngrams -w 25
-# alias gc = git commit -a
 alias gd = git diff
 alias npl = nix profile list
 
@@ -108,6 +106,10 @@ zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
 
 # Zoxide
 source ~/.zoxide.nu
+
+def practice [] {
+  ttyper -l english-ngrams -w 10 
+}
 
 def "mods-gd-continue" [] {
   git diff
