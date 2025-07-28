@@ -81,12 +81,13 @@ def --env find-git-status [...args] {
 
 # Aliases
 # alias hx = helix
-alias la = eza -a
 alias bat = bat --decorations never
+alias copy = xsel --clipboard
 alias ga = git add -A
-alias gs = git status
-alias gl = git log --oneline --graph -n 10
 alias gd = git diff
+alias gl = git log --oneline --graph -n 10
+alias gs = git status
+alias la = eza -a
 alias npl = nix profile list
 
 # alias gemini = npx https://github.com/google-gemini/gemini-cli
