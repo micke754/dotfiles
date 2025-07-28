@@ -88,6 +88,7 @@ alias gd = git diff
 alias gl = git log --oneline --graph -n 10
 alias gs = git status
 alias la = eza -a
+alias validate = databricks bundle validate
 alias npl = nix profile list
 
 # alias gemini = npx https://github.com/google-gemini/gemini-cli
