@@ -86,6 +86,7 @@ alias bat = bat --decorations never
 alias ga = git add -A
 alias gs = git status
 alias gl = git log --oneline --graph -n 10
+alias practice = practice
 # alias gc = git commit -a
 alias gd = git diff
 alias npl = nix profile list
@@ -225,7 +226,7 @@ def "gc" [] {
   print "\n🎯 Time for some typing practice!"
   print "Complete 25 English n-grams:"
   sleep 1sec
-  ttyper -l english-ngrams -w 25
+  practice
   
 }
 
@@ -245,11 +246,18 @@ def "agenda" [] {
   gcalcli agenda now | tail -n +3 | str trim | head -n 7
 }
 
-def nix-replace [
+def nix-profile-replace [
   flake_dir: string
 ] {
-  nix profile remove $"($flake_dir)"  | tee { print } | complete
-  nix profile install $"($flake_dir)/"  | tee { print } | complete
+  let clean_name: string = ($flake_dir | str trim --right --char "/")
+
+  print $"Removing profile: ($clean_name)"
+  nix profile remove $clean_name | tee { print } | complete
+
+  print $"Installing from ($clean_name)/"
+  nix profile install $"(clean_name)/"  | tee { print } | complete
+  
+  print $"Running garbage collection..."
   nix-collect-garbage | tee { print } | complete
 
   print "SUCCESS: Profile replaced and garbage collected."
