@@ -1,4 +1,9 @@
 # LSP Server Config
+[language-server.sqlfluff-lsp]
+command = "sqlfluff-lsp"
+args = ["--stdio"]
+config = { dialect = "databricks" }
+
 [language-server.buffer-language-server]
 command = "buffer-language-server"
 
@@ -179,6 +184,6 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql", "plsql"]
-language-servers = ["buffer-language-server"]
+language-servers = ["buffer-language-server", "sqlfluff-lsp"]
 formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
 auto-format = true

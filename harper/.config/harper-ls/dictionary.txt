@@ -43,6 +43,7 @@ autoscale
 autoscaled
 autoscaling
 backticks
+dbt
 env
 haha
 ingestor
@@ -52,6 +53,7 @@ latencies
 metastore
 mihi
 mins
+miro
 nui
 ora
 pregabalin

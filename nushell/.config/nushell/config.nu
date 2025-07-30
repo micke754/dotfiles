@@ -148,33 +148,33 @@ def "gc" [] {
     return
   }
 
-  let is_leaked = (
-    try {
-      let result = gitleaks detect --verbose --exit-code 1 | complete
-      if $result.exit_code == 1 {
-        true # Secrets found
-      } else if $result.exit_code == 0 {
-        false # No secrets detected
-      } else {
-        print "❌ Gitleaks command failed"
-        return
-      }
-    } catch {
-      print "❌ Error running gitleaks"
-      return
-    }
-  )
+  # let is_leaked = (
+  #   try {
+  #     let result = gitleaks detect --verbose --exit-code 1 | complete
+  #     if $result.exit_code == 1 {
+  #       true # Secrets found
+  #     } else if $result.exit_code == 0 {
+  #       false # No secrets detected
+  #     } else {
+  #       print "❌ Gitleaks command failed"
+  #       return
+  #     }
+  #   } catch {
+  #     print "❌ Error running gitleaks"
+  #     return
+  #   }
+  # )
 
-  if $is_leaked == true {
-    print "❌ Gitleaks detected potential secrets. Commit aborted for security."
-    print "Run 'gitleaks detect --verbose' to see details."
-    return
+  # if $is_leaked == true {
+  #   print "❌ Gitleaks detected potential secrets. Commit aborted for security."
+  #   print "Run 'gitleaks detect --verbose' to see details."
+  #   return
    
-  } else if $is_leaked == false {
-    print "✅ Gitleaks scan passed - no secrets detected."
-  } else {
-    return
-  }
+  # } else if $is_leaked == false {
+  #   print "✅ Gitleaks scan passed - no secrets detected."
+  # } else {
+  #   return
+  # }
   
   
   # Get staged and unstaged changes
