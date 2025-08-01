@@ -82,11 +82,11 @@ layout {
             notification_format_no_notifications ""
             notification_show_interval "10"
 
-            // Add these lines to your default.kdl layout file
-            command_calendar_command     "/Users/kmichaels/.config/zellij/scripts/get-calendar-ical.sh"
-            command_calendar_format      "#[fg=$white]{stdout} "
-            command_calendar_interval    "900" // 900 seconds = 15 minutes
-            command_calendar_rendermode  "static"
+            // // Add these lines to your default.kdl layout file
+            // command_calendar_command     "/Users/kmichaels/.config/zellij/scripts/get-calendar-ical.sh"
+            // command_calendar_format      "#[fg=$white]{stdout} "
+            // command_calendar_interval    "900" // 900 seconds = 15 minutes
+            // command_calendar_rendermode  "static"
 
             datetime          "{format}"
             datetime_format   "%d-%m %H:%M "
