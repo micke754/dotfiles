@@ -1,4 +1,13 @@
 # LSP Server Config
+
+[language-server.sqlfluff-lsp]
+command = "sqlfluff-lsp"
+args = ["--stdio"]
+config = { dialect = "databricks" }
+
+[language-server.databricks-sql-lsp]
+command = "databricks-sql-lsp"
+
 [language-server.buffer-language-server]
 command = "buffer-language-server"
 
@@ -82,11 +91,7 @@ auto-format = true
 [[language]]
 name = "sql"
 language-servers = ["scls"]
-formatter = { command = "sqlfmt", args = [
-  "--stdin-filename",
-  "$FILENAME",
-  "-",
-] }
+formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
 
 [[language]]
 name = "yaml"
