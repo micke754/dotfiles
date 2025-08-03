@@ -1,6 +1,4 @@
-# theme = "base16_transparent"
-theme = "peachpuff_custom"
-
+theme = "base16_transparent" # good default "base16_transparent"
 [editor]
 # scrolloff = 25
 auto-format = true
