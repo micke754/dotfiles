@@ -83,6 +83,8 @@ def --env find-git-status [...args] {
 
 # alias hx = helix
 alias bat = bat --decorations never
+alias copy = pbcopy
+alias paste = pbpaste
 alias la = lsd -a
 alias lt = lsd --tree --depth 2
 alias ll = lsd -l
