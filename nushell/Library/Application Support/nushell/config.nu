@@ -9,6 +9,14 @@
 # config nu
 #
 # See `help config nu` for more options
+# config settings
+$env.config.show_banner = false
+$env.config.buffer_editor = "hx"
+$env.config.edit_mode = "vi"
+$env.config.shell_integration.osc133 = false
+$env.config.use_kitty_protocol = false
+$env.EDITOR = "hx"
+# $env.NVIM_APPNAME = "hex-vim"
 
 # Paths
 
@@ -84,12 +92,6 @@ alias gs = git status
 alias gd = git diff 
 alias npl = nix profile list
 
-$env.config.show_banner = false
-$env.config.buffer_editor = "hx"
-$env.config.edit_mode = "vi"
-$env.config.shell_integration.osc133 = false
-$env.EDITOR = "hx"
-# $env.NVIM_APPNAME = "hex-vim"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")

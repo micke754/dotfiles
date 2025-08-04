@@ -89,11 +89,6 @@ formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
 [[language]]
-name = "sql"
-language-servers = ["scls"]
-formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
-
-[[language]]
 name = "yaml"
 formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
 auto-format = true
@@ -148,3 +143,9 @@ name = "nu"
 [[grammar]]
 name = "r"
 source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
+
+[[language]]
+name = "sql"
+language-servers = ["databricks-sql-lsp"]
+formatter = { command = "sqlfastfmt" }
+auto-format = true

@@ -790,10 +790,6 @@
                             "to": [{ "key_code": "d" }]
                         },
                         {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "left_control" }]
-                        },
-                        {
                             "from": { "key_code": "d" },
                             "to": [{ "key_code": "s" }]
                         },
