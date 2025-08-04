@@ -84,15 +84,15 @@ def --env find-git-status [...args] {
 # alias hx = helix
 alias bat = bat --decorations never
 alias copy = pbcopy
-alias paste = pbpaste
-alias la = lsd -a
-alias lt = lsd --tree --depth 2
-alias ll = lsd -l
 alias ga = git add -A
+alias gd = git diff 
 alias gl = git log --oneline --graph -n 10
 alias gs = git status 
-alias gd = git diff 
+alias la = lsd -a
+alias ll = lsd -l
+alias lt = lsd --tree --depth 2
 alias npl = nix profile list
+alias paste = pbpaste
 
 
 # Starship
