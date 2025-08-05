@@ -28,11 +28,11 @@ $env.PATH = (
   | append ~/.bun/bin
 )
 
-# $env.XDG_CONFIG_HOME = "~/kmichaels/.config"
+$env.XDG_CONFIG_HOME = ".config"
 
-# # Topiary Nushell Fmt
-# $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
-# $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
+# Topiary Nushell Fmt
+$env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
+$env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
 
 
 

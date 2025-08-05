@@ -138,7 +138,8 @@ formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
 name = "nu"
-# formatter = { command = "nufmt", args = ["--stdin-filename", "$FILENAME", "-"] }
+auto-format = true
+formatter = { command = "topiary", args = ["format", "--language", "nu"] }
 
 [[grammar]]
 name = "r"
