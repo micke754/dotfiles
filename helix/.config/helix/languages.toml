@@ -8,6 +8,9 @@ config = { dialect = "databricks" }
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
 
+[language-server.steel-ls]
+command = "steel-language-server"
+
 [language-server.buffer-language-server]
 command = "buffer-language-server"
 
@@ -149,4 +152,18 @@ source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
 name = "sql"
 language-servers = ["databricks-sql-lsp"]
 formatter = { command = "sqlfastfmt" }
+auto-format = true
+
+[[language]]
+name = "scheme"
+language-servers = ["steel-ls"]
+formatter = { command = "raco", args = [
+  "fmt",
+  "--width",
+  "70",
+  "--indent",
+  "0",
+  "--max-blank-lines",
+  "2",
+] }
 auto-format = true

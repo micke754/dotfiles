@@ -3,7 +3,12 @@ theme = "base16_transparent" # good default "base16_transparent"
 # scrolloff = 25
 auto-format = true
 continue-comments = false
-gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers" if needed
+gutters = [
+  "line-numbers",
+  "diff",
+  "diagnostics",
+  "spacer",
+] # add "line-numbers" if needed
 
 [editor.cursor-shape]
 insert = "bar"
@@ -59,8 +64,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 #   ":sh tmux paste-buffer -t right; tmux send-keys -t right Enter",
 # ]
 
-# [keys.normal.space]
-# "t" = ["yank_to_clipboard", ":sh send-to-pane-zellij"]
+[keys.normal.space.t]
+"s" = ["yank_to_clipboard", ":sh send-to-zellij"]
+"r" = [":sh steel %[buffer_name]"]
 
 [keys.normal.space.w]
 "w" = [":write"]
@@ -72,6 +78,3 @@ V = ["select_mode", "extend_to_line_bounds"]
 "s" = [":lsp-stop"]
 "r" = [":lsp-restart"]
 "w" = [":lsp-workspace-command"]
-
-[keys.normal.space]
-"m" = ["yank_to_clipboard", ":sh 'ai-menu.sh python' | pbpaste"]

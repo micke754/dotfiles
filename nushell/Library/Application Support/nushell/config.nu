@@ -16,6 +16,7 @@ $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 $env.config.use_kitty_protocol = false
 $env.EDITOR = "hx"
+$env.default_model = "oss-20"
 # $env.NVIM_APPNAME = "hex-vim"
 
 # Paths
@@ -26,13 +27,13 @@ $env.PATH = (
   | append ~/.local/bin
   | append ~/Bash-Scripts
   | append ~/.bun/bin
+  | append ~/.ghcup/bin/
 )
 
-$env.XDG_CONFIG_HOME = ".config"
-
-# Topiary Nushell Fmt
-$env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
-$env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
+# $env.XDG_CONFIG_HOME = "~/.config"
+# # Topiary Nushell Fmt
+# $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
+# $env.TOPIARY_LANGUAGE_DIR = ($env.XDG_CONFIG_HOME | path join topiary languages)
 
 
 
@@ -45,6 +46,11 @@ def --env y [...args] {
     cd $cwd
   }
   rm -fp $tmp
+}
+
+def daily-note [] {
+  let todays_date = date now | format date "%Y-%m-%d" | append ".md" | str join
+  touch $todays_date
 }
 
 def --env find-git-status [...args] {
@@ -86,7 +92,8 @@ alias bat = bat --decorations never
 alias copy = pbcopy
 alias ga = git add -A
 alias gd = git diff 
-alias gl = git log --oneline --graph -n 10
+alias gl = git log --oneline --graph 
+alias glf = git log --oneline --graph HEAD...origin/main
 alias gs = git status 
 alias la = lsd -a
 alias ll = lsd -l
@@ -226,7 +233,7 @@ def "trigger-and-monitor-pipeline" [
 
 def "mods-gd" [] {
   git diff
-  | mods --no-cache --quiet --temp 0.5 --model lite """
+  | mods --no-cache --quiet --temp 0.1 --model $env.default_model """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -263,7 +270,7 @@ def "gc" [] {
 
   # Generate commit message
   echo $input_for_mods
-  | mods --model lite --no-cache """
+  | mods --model $env.default_model --quiet --temp 0.1 --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>
 
@@ -300,12 +307,9 @@ def nix-profile-replace [
   nix profile remove $clean_name | tee { print } | complete
 
   print $"Installing from ($clean_name)/"
-  nix profile install $"(clean_name)/"  | tee { print } | complete
+  nix profile install $"($clean_name)/"  | tee { print } | complete
   
-  print $"Running garbage collection..."
-  nix-collect-garbage | tee { print } | complete
-
-  print "SUCCESS: Profile replaced and garbage collected."
+  print "SUCCESS: Profile replaced"
 }
 
 # Completions
