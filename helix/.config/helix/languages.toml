@@ -160,7 +160,7 @@ language-servers = ["steel-ls"]
 formatter = { command = "raco", args = [
   "fmt",
   "--width",
-  "70",
+  "60",
   "--indent",
   "0",
   "--max-blank-lines",
