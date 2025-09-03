@@ -87,7 +87,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["scls", "basedpyright", "ty", "ruff"]
+language-servers = ["scls", "basedpyrigh", "ruff", "ty"]                        # "basedpyrigh", "ruff"
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 

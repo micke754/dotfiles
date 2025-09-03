@@ -149,6 +149,7 @@ def "trigger-and-monitor-pipeline" [
   branch_name: string # The branch to trigger the pipeline on
   --debug # Optional: Enable debug logging for Azure CLI commands
   --parameters: list<string> = [] # Optional: List of pipeline parameters (e.g., ["key1=value1", "key2=value2"])
+  --show-output # Optional: Display pipeline logs after completion
 ] {
 
   # Store the start time for duration calculation
@@ -223,11 +224,18 @@ def "trigger-and-monitor-pipeline" [
   echo $"Total time elapsed: ($elapsed_duration)"
 
   if ($result == "succeeded") {
-    echo "Pipeline completed successfully!"
+    echo "🚀 Pipeline completed successfully!"
     # exit 0
   } else {
     echo "Pipeline finished with a non-success result."
     # exit 1 # Indicate failure
+  }
+
+  # Open pipeline results in browser if requested
+  if $show_output {
+    echo "------------------------------------"
+    echo "Opening pipeline results in browser..."
+    ^az pipelines runs show --id $run_id --open ...$debug_flag
   }
 }
 
