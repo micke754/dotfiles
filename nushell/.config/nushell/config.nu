@@ -261,10 +261,7 @@ def nix-profile-replace [
   print $"Installing from ($clean_name)/"
   nix profile install $"($clean_name)/"  | tee { print } | complete
   
-  print $"Running garbage collection..."
-  nix-collect-garbage | tee { print } | complete
-
-  print "SUCCESS: Profile replaced and garbage collected."
+  print "SUCCESS: Profile replaced."
 }
 
 

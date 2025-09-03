@@ -162,6 +162,11 @@ name = "nu"
 auto-format = true
 formatter = { command = "topiary", args = ["format", "--language", "nu"] }
 
+[[language]]
+name = "typst"
+auto-format = true
+formatter = { command = "typstyle", args = ["--inplace"] }
+
 [[grammar]]
 name = "r"
 source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
