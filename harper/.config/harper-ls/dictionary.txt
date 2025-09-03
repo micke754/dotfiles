@@ -16,6 +16,7 @@ Lakeflow
 Lakehouse
 LangChain
 LincPort
+Muhl
 Nav
 Ngā
 Nushell
@@ -48,6 +49,7 @@ env
 haha
 ingestor
 iteratively
+koutou
 kōrua
 latencies
 metastore

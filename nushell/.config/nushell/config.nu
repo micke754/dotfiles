@@ -259,7 +259,7 @@ def nix-profile-replace [
   nix profile remove $clean_name | tee { print } | complete
 
   print $"Installing from ($clean_name)/"
-  nix profile install $"(clean_name)/"  | tee { print } | complete
+  nix profile install $"($clean_name)/"  | tee { print } | complete
   
   print $"Running garbage collection..."
   nix-collect-garbage | tee { print } | complete
