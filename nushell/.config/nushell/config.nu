@@ -47,6 +47,11 @@ def --env y [...args] {
   rm -fp $tmp
 }
 
+def daily-note [] {
+  let todays_date = date now | format date "%Y-%m-%d" | append ".md" | str join
+  touch $todays_date
+}
+
 def --env find-git-status [...args] {
   # Find all .git directories recursively and get their full paths.
   # Use `^find` to invoke the external 'find' utility.
