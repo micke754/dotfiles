@@ -1,4 +1,6 @@
 # LSP Server Config
+[language-server.tinymist]
+command = "tinymist"
 
 [language-server.sqlfluff-lsp]
 command = "sqlfluff-lsp"
@@ -167,3 +169,9 @@ formatter = { command = "raco", args = [
   "2",
 ] }
 auto-format = true
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist", "harper-ls"]
+auto-format = true
+formatter = { command = "typstyle", args = ["--inplace"] }
