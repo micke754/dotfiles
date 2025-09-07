@@ -13,9 +13,10 @@ local config = wezterm.config_builder()
 -- config.initial_rows = 28
 
 -- or, changing the font size and color scheme.
-config.font_size = 16
+config.font_size = 15
 
-config.font = wezterm.font("FiraCode Nerd Font Propo")
+config.font = wezterm.font("MartianMono Nerd Font Propo")
+-- config.font = wezterm.font("FiraCode Nerd Font Propo")
 -- config.font = wezterm.font("IosevkaTerm Nerd Font Propo")
 
 -- config.color_scheme = "Rosé Pine (base16)"
