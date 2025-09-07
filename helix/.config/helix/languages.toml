@@ -172,6 +172,6 @@ auto-format = true
 
 [[language]]
 name = "typst"
-language-servers = ["tinymist", "harper-ls"]
+language-servers = ["tinymist"]                            # "harper-ls"
 auto-format = true
 formatter = { command = "typstyle", args = ["--inplace"] }
