@@ -322,7 +322,7 @@ def nix-profile-replace [
 
 # Completions
 
-# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
 let carapace_completer = {|spans|
     carapace $spans.0 nushell ...$spans | from json
 }
@@ -338,12 +338,12 @@ let fish_completer = {|spans|
 
 $env.config.completions.external = {
   completer: $fish_completer
-  enable: true
+  enable: false
   
 }
 
 $env.config.completions.external = {
   completer:  $carapace_completer
-  enable:  false
+  enable:  true
   
 }
