@@ -59,8 +59,12 @@ V = ["select_mode", "extend_to_line_bounds"]
 #   ":sh tmux paste-buffer -t right; tmux send-keys -t right Enter",
 # ]
 
+# [keys.normal.space.t]
+# "s" = ["yank_to_clipboard", ":sh send-to-zellij"]
+# "r" = [":sh steel %[buffer_name]"]
+
 [keys.normal.space.t]
-"s" = ["yank_to_clipboard", ":sh send-to-zellij"]
+"s" = ["yank_to_clipboard", ":sh ~/Bash-Scripts/wezterm-to-repl"]
 "r" = [":sh steel %[buffer_name]"]
 
 [keys.normal.space.w]

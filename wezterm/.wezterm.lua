@@ -8,63 +8,68 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
--- -- Simple leader indicator only
--- wezterm.on("update-status", function(window, pane)
--- 	local leader = ""
--- 	if window:leader_is_active() then
--- 		leader = "● " -- Simple dot
--- 	end
+-- Helper function to get next pane
+local function get_next_pane(current_pane)
+	local tab = current_pane:tab()
+	local panes = tab:panes()
+	local current_pane_id = current_pane:pane_id()
 
--- 	window:set_left_status(wezterm.format({
--- 		{ Foreground = { Color = "#e0def4" } }, -- Rose Pine text
--- 		{ Background = { Color = "#191724" } }, -- Rose Pine base
--- 		{ Text = leader },
--- 	}))
--- end)
+	for i, p in ipairs(panes) do
+		if p:pane_id() == current_pane_id then
+			local next_index = (i % #panes) + 1
+			return panes[next_index]
+		end
+	end
+	return nil
+end
 
--- -- Zoom indicator function
--- wezterm.on("update-right-status", function(window, pane)
--- 	local zoom = ""
--- 	local tab = pane:tab()
--- 	if tab then
--- 		local panes = tab:panes()
--- 		-- Only show zoom indicator if there are multiple panes AND current pane appears to be zoomed
--- 		if #panes > 1 then
--- 			local pane_dims = pane:get_dimensions()
--- 			local tab_dims = tab:get_size()
--- 			-- A pane is zoomed if it's taking up nearly the full tab space despite multiple panes existing
--- 			if pane_dims.viewport_rows >= tab_dims.rows - 2 and pane_dims.viewport_cols >= tab_dims.cols - 2 then
--- 				zoom = " 🔍 ZOOM "
--- 			end
--- 		end
--- 	end
+-- Helper function to find REPL pane
+local function find_repl_pane(current_pane)
+	local tab = current_pane:tab()
+	local panes = tab:panes()
 
--- 	window:set_right_status(wezterm.format({
--- 		{ Foreground = { Color = "#e0def4" } }, -- Rose Pine gold
--- 		{ Background = { Color = "#191724" } }, -- Rose Pine base
--- 		{ Text = zoom },
--- 	}))
--- end)
+	for _, p in ipairs(panes) do
+		if p:pane_id() ~= current_pane:pane_id() then
+			local process = p:get_foreground_process_name()
+			if
+				process:match("nu")
+				or process:match("python")
+				or process:match("node")
+				or process:match("julia")
+				or process:match("steel")
+			then
+				return p
+			end
+		end
+	end
 
--- -- Enhanced status bar with time, date, and battery 🔋
--- wezterm.on("update-right-status", function(window, pane)
--- 	local date = wezterm.strftime("  %m-%d  %H:%M  ")
--- 	-- local hostname = wezterm.hostname()
--- 	-- Optional: Add battery info if available
--- 	local battery = ""
--- 	for _, b in ipairs(wezterm.battery_info()) do
--- 		battery = string.format(" %.0f%% ", b.state_of_charge * 100)
--- 		break
--- 	end
--- 	window:set_right_status(wezterm.format({
--- 		{ Foreground = { Color = "#e0def4" } }, -- Muted color
--- 		{ Background = { Color = "#191724" } }, -- Rose Pine text color
--- 		{ Foreground = { Color = "#e0def4" } }, -- Main text color
--- 		{ Background = { Color = "#191724" } }, -- Rose Pine text color
--- 		{ Text = " " .. date },
--- 		{ Text = battery },
--- 	}))
--- end)
+	-- Fallback to next pane
+	return get_next_pane(current_pane)
+end
+
+wezterm.on("send_to_repl", function(window, pane)
+	local clipboard = window:get_clipboard("Clipboard")
+
+	if not clipboard or clipboard == "" then
+		window:toast_notification("WezTerm", "No code to send", nil, 2000)
+		return
+	end
+
+	local repl_pane = find_repl_pane(pane)
+	if repl_pane then
+		repl_pane:activate()
+		local bracketed = "\x1b[200~" .. clipboard .. "\x1b[201~"
+		repl_pane:send_text(bracketed .. "\r\n")
+
+		-- Show what we sent
+		local preview = clipboard:sub(1, 50) .. (clipboard:len() > 50 and "..." or "")
+		window:toast_notification("Sent to REPL", preview, nil, 1500)
+
+		pane:activate() -- return to editor
+	else
+		window:toast_notification("WezTerm", "No REPL pane found", nil, 3000)
+	end
+end)
 
 -- Combined status: leader indicator (left) + zoom + time + battery (right)
 wezterm.on("update-status", function(window, pane)
@@ -95,7 +100,7 @@ wezterm.on("update-status", function(window, pane)
 		end
 	end
 
-	local date = wezterm.strftime("󰃰  %m-%d  %H:%M ")
+	local date = wezterm.strftime(" %m-%d  %H:%M ")
 	local battery = ""
 	for _, b in ipairs(wezterm.battery_info()) do
 		battery = string.format(" %.0f%% ", b.state_of_charge * 100)
