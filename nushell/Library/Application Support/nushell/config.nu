@@ -9,6 +9,7 @@
 # config nu
 #
 # See `help config nu` for more options
+#
 # config settings
 $env.config.show_banner = false
 $env.config.buffer_editor = "hx"
@@ -19,16 +20,16 @@ $env.EDITOR = "hx"
 $env.default_model = "oss-20"
 # $env.NVIM_APPNAME = "hex-vim"
 
-# Paths
-
-$env.PATH = (
-  $env.PATH
-  | append ~/.cargo/bin
-  | append ~/.local/bin
-  | append ~/Bash-Scripts
-  | append ~/.bun/bin
-  | append ~/.ghcup/bin/
-)
+# # Paths
+# $env.PATH = (
+#   $env.PATH
+#   | append ~/.cargo/bin
+#   | append ~/.nix-profile/bin/
+#   | append ~/.local/bin
+#   | append ~/Bash-Scripts
+#   | append ~/.bun/bin
+#   | append ~/.ghcup/bin/
+# )
 
 # $env.XDG_CONFIG_HOME = "~/.config"
 # # Topiary Nushell Fmt
@@ -107,6 +108,8 @@ mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
 # Zoxide
+zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
+
 source ~/.zoxide.nu
 
 def "fgs" [] {
@@ -277,7 +280,7 @@ def "gc" [] {
   }
 
   # Generate commit message
-  echo $input_for_mods
+  $input_for_mods
   | mods --model $env.default_model --quiet --temp 0.1 --no-cache """
   Generate a commit message for these changes using the conventional commits format; don't use backticks. Below is a template of the format:
     <type>[optional scope]: <description>

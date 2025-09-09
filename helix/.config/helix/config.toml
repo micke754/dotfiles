@@ -3,12 +3,7 @@ theme = "base16_transparent" # good default "base16_transparent"
 # scrolloff = 25
 auto-format = true
 continue-comments = false
-gutters = [
-  "line-numbers",
-  "diff",
-  "diagnostics",
-  "spacer",
-] # add "line-numbers" if needed
+gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers", if needed
 
 [editor.cursor-shape]
 insert = "bar"
