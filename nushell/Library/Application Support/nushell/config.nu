@@ -109,8 +109,10 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 
 # Zoxide
 zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
-
 source ~/.zoxide.nu
+
+# UV
+source ~/.uv.nu
 
 def "fgs" [] {
     # Find all .git directories recursively and get their full paths.
@@ -341,7 +343,7 @@ let fish_completer = {|spans|
 
 $env.config.completions.external = {
   completer: $fish_completer
-  enable: false
+  enable: true
   
 }
 

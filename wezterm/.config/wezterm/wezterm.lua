@@ -1,12 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
 local font_size = 15
-local mux = wezterm.mux
-
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spaw_window(cmd or {})
-	window:gui_window():maximize()
-end)
 
 -- Combined status: leader indicator (left) + zoom + time + battery (right)
 wezterm.on("update-status", function(window, pane)
@@ -50,7 +44,7 @@ wezterm.on("update-status", function(window, pane)
 		{ Text = zoom .. date .. battery },
 	}))
 end)
-
+-- zoom .. date .. battery
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
@@ -76,6 +70,7 @@ config.font = wezterm.font("MartianMono Nerd Font Propo")
 
 -- config.color_scheme = "Rosé Pine (base16)"
 config.color_scheme = "rose-pine"
+-- config.color_scheme = "catppuccin-mocha"
 
 config.window_frame = {
 	active_titlebar_bg = "#191724", -- Rose Pine base
@@ -130,17 +125,30 @@ config.keys = {
 	{ key = "8", mods = "LEADER", action = action.ActivateTab(7) },
 	{ key = "9", mods = "LEADER", action = action.ActivateTab(8) },
 
-	-- Resizing
-	{ key = "h", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Left", 2 }) },
-	{ key = "j", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Down", 2 }) },
-	{ key = "k", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Up", 2 }) },
-	{ key = "l", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Right", 2 }) },
+	-- -- Resizing
+	-- { key = "h", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Left", 2 }) },
+	-- { key = "j", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Down", 2 }) },
+	-- { key = "k", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Up", 2 }) },
+	-- { key = "l", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Right", 2 }) },
 
 	-- Copy mode (like tmux)
 	{ key = "[", mods = "LEADER", action = action.ActivateCopyMode },
 
 	-- Zoom pane (like tmux)
 	{ key = "z", mods = "LEADER", action = action.TogglePaneZoomState },
+	{ key = "w", mods = "LEADER", action = action.ShowLauncherArgs({ flags = "WORKSPACES" }) },
+	{
+		key = "$",
+		mods = "LEADER",
+		action = action.PromptInputLine({
+			description = "Enter new name for workspace",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:perform_action(action.SwitchToWorkspace({ name = line }), pane)
+				end
+			end),
+		}),
+	},
 }
 
 -- Finally, return the configuration to wezterm:
