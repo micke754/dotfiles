@@ -81,18 +81,23 @@ config.window_frame = {
 	font = wezterm.font("MartianMono Nerd Font Propo"),
 }
 
--- Keyboard magic
-config.enable_kitty_keyboard = true
-local action = wezterm.action
-
 config.colors = {
 	tab_bar = {
 		background = "#191724", -- Rose Pine base to match your theme
 	},
 }
 
+-- Keyboard magic
+config.enable_kitty_keyboard = true
+local action = wezterm.action
+
+-- Keys
+-- config.disable_default_key_bindings = true
+
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
+
+	{ key = "p", mods = "CTRL|SHIFT", action = action.ActivateCommandPalette },
 	-- Pane splitting (like tmux)
 	{ key = '"', mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "'", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },

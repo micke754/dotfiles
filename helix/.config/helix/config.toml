@@ -1,6 +1,6 @@
 theme = "base16_transparent" # good default "base16_transparent"
 [editor]
-# scrolloff = 25
+scrolloff = 25
 auto-format = true
 continue-comments = false
 gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers", if needed
@@ -65,7 +65,8 @@ V = ["select_mode", "extend_to_line_bounds"]
 
 [keys.normal.space.t]
 "s" = ["yank_to_clipboard", ":sh ~/Bash-Scripts/wezterm-to-repl"]
-"r" = [":sh uv run %[buffer_name]"]
+"r" = [":sh steel %[buffer_name]"]
+# "r" = [":sh uv run %[buffer_name]"]
 "t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
 
 [keys.normal.space.w]
