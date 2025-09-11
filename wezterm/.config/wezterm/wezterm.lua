@@ -137,11 +137,11 @@ config.keys = {
 	{ key = "8", mods = "LEADER", action = action.ActivateTab(7) },
 	{ key = "9", mods = "LEADER", action = action.ActivateTab(8) },
 
-	-- -- Resizing
-	-- { key = "h", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Left", 2 }) },
-	-- { key = "j", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Down", 2 }) },
-	-- { key = "k", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Up", 2 }) },
-	-- { key = "l", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Right", 2 }) },
+	-- Resizing
+	{ key = "LeftArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Left", 2 }) },
+	{ key = "DownArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Down", 2 }) },
+	{ key = "UpArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Up", 2 }) },
+	{ key = "RightArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Right", 2 }) },
 
 	-- Copy mode (like tmux)
 	{ key = "[", mods = "LEADER", action = action.ActivateCopyMode },

@@ -65,8 +65,8 @@ V = ["select_mode", "extend_to_line_bounds"]
 
 [keys.normal.space.t]
 "s" = ["yank_to_clipboard", ":sh ~/Bash-Scripts/wezterm-to-repl"]
-"r" = [":sh steel %[buffer_name]"]
-# "r" = [":sh uv run %[buffer_name]"]
+# "r" = [":sh steel %[buffer_name]"]
+"r" = [":sh uv run %[buffer_name]"]
 "t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
 
 [keys.normal.space.w]
