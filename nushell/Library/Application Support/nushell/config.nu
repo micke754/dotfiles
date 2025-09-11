@@ -92,6 +92,7 @@ def --env find-git-status [...args] {
 alias bat = bat --decorations never
 alias copy = pbcopy
 alias ga = git add -A
+alias gp = git push
 alias gd = git diff 
 alias gl = git log --oneline --graph 
 alias glf = git log --oneline --graph HEAD...origin/main

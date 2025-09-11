@@ -92,12 +92,19 @@ config.enable_kitty_keyboard = true
 local action = wezterm.action
 
 -- Keys
--- config.disable_default_key_bindings = true
+config.disable_default_key_bindings = true
 
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
 
+	-- Control Palette
 	{ key = "p", mods = "CTRL|SHIFT", action = action.ActivateCommandPalette },
+
+	-- Copy selection to clipboard
+	{ key = "c", mods = "SHIFT|CTRL", action = action.CopyTo("Clipboard") },
+	-- Paste from clipboard
+	{ key = "v", mods = "SHIFT|CTRL", action = action.PasteFrom("Clipboard") },
+
 	-- Pane splitting (like tmux)
 	{ key = '"', mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "'", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
