@@ -19,14 +19,15 @@
 # Environment Stuff
 # Paths
 
-$env.PATH = (
-  $env.PATH
-  | append ~/.cargo/bin
-  | append /home/kmichaels/.local/bin
-  | append /home/kmichaels/Bash-Scripts
-  | append /home/kmichaels/.bun/bin
-  # | append /home/kmichaels/Open-Source/Mods/dist
-)
+# $env.PATH = (
+#   $env.PATH
+#   | append ~/.cargo/bin
+#   | append /home/kmichaels/.local/bin
+#   | append /home/kmichaels/Bash-Scripts
+#   | append /home/kmichaels/.bun/bin
+#   # | append /home/kmichaels/Open-Source/Mods/dist
+# )
+
 # Helps gpg to know what prompt to use
 $env.GPG_TTY = (tty)
 
@@ -45,6 +46,14 @@ def --env y [...args] {
     cd $cwd
   }
   rm -fp $tmp
+}
+
+def copy [] {
+ xsel --clipboard
+}
+
+def copy-path [] {
+  powershell.exe -c "(pwd).Path" | copy
 }
 
 def daily-note [] {
@@ -87,10 +96,10 @@ def --env find-git-status [...args] {
 # Aliases
 # alias hx = helix
 alias bat = bat --decorations never
-alias copy = xsel --clipboard
 alias ga = git add -A
 alias gd = git diff
 alias gl = git log --oneline --graph -n 10
+alias gp = git push
 alias gs = git status
 alias la = eza -a
 alias validate = databricks bundle validate

@@ -1,4 +1,4 @@
-theme = "rose_pine_moon" # good default base16_transparent
+theme = "base16_transparent" # good default base16_transparent
 
 [editor]
 # scrolloff = 15
