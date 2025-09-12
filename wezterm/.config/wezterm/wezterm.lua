@@ -143,6 +143,10 @@ config.keys = {
 	{ key = "UpArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Up", 2 }) },
 	{ key = "RightArrow", mods = "SHIFT|CTRL", action = action.AdjustPaneSize({ "Right", 2 }) },
 
+	-- Font size adjustment (Cmd + +/-)
+	{ key = "=", mods = "SUPER", action = action.IncreaseFontSize },
+	{ key = "-", mods = "SUPER", action = action.DecreaseFontSize },
+
 	-- Copy mode (like tmux)
 	{ key = "[", mods = "LEADER", action = action.ActivateCopyMode },
 
