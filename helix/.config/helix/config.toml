@@ -1,6 +1,6 @@
 theme = "base16_transparent" # good default "base16_transparent"
 [editor]
-scrolloff = 25
+# scrolloff = 25
 auto-format = true
 continue-comments = false
 gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers", if needed
@@ -19,9 +19,9 @@ focus-lost = true
 [editor.lsp]
 enable = true
 display-messages = false
-auto-signature-help = true
+auto-signature-help = false
 display-inlay-hints = true
-display-signature-help-docs = false
+display-signature-help-docs = true
 snippets = true
 goto-reference-include-declaration = true
 
