@@ -41,6 +41,9 @@ args = ["persistent"]
 command = "ty"
 args = ["server"]
 
+[language-server.ty.config.ty]
+disableLanguageServices = true
+
 [language-server.basedpyright]
 command = "basedpyright-langserver"
 args = ["--stdio"]
