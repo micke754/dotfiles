@@ -65,7 +65,7 @@ V = ["select_mode", "extend_to_line_bounds"]
 # ]
 
 [keys.normal.space.t]
-"s" = ["yank_to_clipboard", ":sh send-to-zellij"]
+"s" = ["yank_to_clipboard", ":sh send-to-tmux"]
 "q" = [":quit-all!"]
 
 [keys.normal.space.t.c]
