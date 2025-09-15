@@ -69,7 +69,7 @@ command = "pyright-langserver"
 args = ["--stdio"]
 
 [language-server.pyright.config.python.analysis]
-typeCheckingMode = "basic"
+typeCheckingMode = "none"
 
 # if you choose `ruff` itself
 [language-server.ruff]
@@ -105,7 +105,7 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["scls", "ty"]
+language-servers = ["scls", "pyright", "ty"]
 # language-servers = ["scls", "basedpyrigh","ruff", "ty"]                                       
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
