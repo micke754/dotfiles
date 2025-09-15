@@ -66,7 +66,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 
 [keys.normal.space.t]
 "s" = ["yank_to_clipboard", ":sh send-to-tmux"]
-"q" = [":quit-all!"]
+# "r" = [":sh steel %[buffer_name]"]
+"r" = [":sh uv run %[buffer_name]"]
+"t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
 
 [keys.normal.space.t.c]
 "r" = [":config-reload"]
