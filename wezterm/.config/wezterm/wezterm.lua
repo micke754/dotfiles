@@ -116,7 +116,7 @@ config.keys = {
 	{ key = "DownArrow", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
 
 	-- Tab management (like tmux windows)
-	{ key = "t", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
+	{ key = "c", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
 	{ key = "x", mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
 	{ key = "&", mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
 	{ key = "d", mods = "LEADER", action = action.DetachDomain("CurrentPaneDomain") },
