@@ -54,10 +54,6 @@ V = ["select_mode", "extend_to_line_bounds"]
 "C-n" = ["move_line_down"]
 "C-p" = ["move_line_up"]
 
-
-[keys.insert.j]
-"j" = ["normal_mode"]
-
 # [keys.normal.space]
 # "t" = [
 #   "yank_to_clipboard",
@@ -87,9 +83,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 "m" = [":set-language markdown"]
 
 
-# create a new minor mode bound to `+`
-[keys.normal."+"]
-m = ":run-shell-command echo 2"
-c = ":run-shell-command cargo build"
-t = ":run-shell-command cargo test"
-n = ":run-shell-command echo 3"
+# # create a new minor mode bound to `+`
+# [keys.normal."+"]
+# m = ":run-shell-command echo 2"
+# c = ":run-shell-command cargo build"
+# t = ":run-shell-command cargo test"
+# n = ":run-shell-command echo 3"
