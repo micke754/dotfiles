@@ -149,25 +149,18 @@ def "fgs" [] {
 
 
 # Az trigger and monitor pipelines
-
 def "trigger-and-monitor-pipeline" [
-  pipeline_name: string # The name of the Azure DevOps pipeline
-  branch_name: string # The branch to trigger the pipeline on
-  --debug # Optional: Enable debug logging for Azure CLI commands
-  --parameters: list<string> = [] # Optional: List of pipeline parameters (e.g., ["key1=value1", "key2=value2"])
-  --show-output # Optional: Display pipeline logs after completion
+  pipeline_name: string
+  branch_name: string
+  --debug
+  --parameters: list<string> = []
 ] {
-
-  # Store the start time for duration calculation
   let start_time = (date now)
-
   echo $"Triggering pipeline: ($pipeline_name) on branch ($branch_name)..."
 
-  # Build optional flags for 'az pipelines run'
   let debug_flag = if $debug { ["--debug"] } else { [] }
   let params_flags = if (not ($parameters | is-empty)) { ["--parameters"] | append $parameters } else { [] }
 
-  # Execute 'az pipelines run' with conditional flags
   let run_output = (
     try {
       az pipelines run --name $pipeline_name --branch $branch_name ...$debug_flag ...$params_flags --output json | from json
@@ -176,6 +169,11 @@ def "trigger-and-monitor-pipeline" [
       exit 1
     }
   )
+
+  if ($run_output == nothing) {
+    echo $"Error: Failed to trigger pipeline. Branch ($branch_name) may not exist or other error occurred."
+    exit 1
+  }
 
   let run_id = $run_output.id
   let run_web_url = $run_output.url
@@ -193,19 +191,18 @@ def "trigger-and-monitor-pipeline" [
   mut result = "unknown"
 
   while ($status != "completed" and $status != "cancelling") {
-    echo $"Checking status of run ($run_id)" # Print without newline
+    echo $"Checking status of run ($run_id)"
     for _ in 1..3 {
-      print -n "." # Add dots for visual feedback
+      print -n "."
       sleep 0.5sec
     }
-    print "" # Newline after dots
+    print ""
 
     let current_run_details = (
       try {
         ^az pipelines runs show --id $run_id ...$debug_flag --query '{status:status, result:result}' -o json | from json
       } catch {
         echo "Error: Azure CLI command failed or returned invalid JSON for checking status."
-        # exit 1
       }
     )
 
@@ -217,9 +214,8 @@ def "trigger-and-monitor-pipeline" [
       echo $"Final Result: ($result)"
     }
 
-    # Only sleep if the pipeline is not yet completed or cancelling
     if ($status != "completed" and $status != "cancelling") {
-      sleep 15sec # Wait for 15 seconds before checking again
+      sleep 15sec
     }
   }
 
@@ -231,19 +227,108 @@ def "trigger-and-monitor-pipeline" [
 
   if ($result == "succeeded") {
     echo "🚀 Pipeline completed successfully!"
-    # exit 0
+    true
   } else {
     echo "Pipeline finished with a non-success result."
-    # exit 1 # Indicate failure
-  }
-
-  # Open pipeline results in browser if requested
-  if $show_output {
-    echo "------------------------------------"
-    echo "Opening pipeline results in browser..."
-    ^az pipelines runs show --id $run_id --open ...$debug_flag
+    false
   }
 }
+
+
+# def "trigger-and-monitor-pipeline" [
+#   pipeline_name: string # The name of the Azure DevOps pipeline
+#   branch_name: string # The branch to trigger the pipeline on
+#   --debug # Optional: Enable debug logging for Azure CLI commands
+#   --parameters: list<string> = [] # Optional: List of pipeline parameters (e.g., ["key1=value1", "key2=value2"])
+#   --show-output # Optional: Display pipeline logs after completion
+# ] {
+
+#   # Store the start time for duration calculation
+#   let start_time = (date now)
+
+#   echo $"Triggering pipeline: ($pipeline_name) on branch ($branch_name)..."
+
+#   # Build optional flags for 'az pipelines run'
+#   let debug_flag = if $debug { ["--debug"] } else { [] }
+#   let params_flags = if (not ($parameters | is-empty)) { ["--parameters"] | append $parameters } else { [] }
+
+#   # Execute 'az pipelines run' with conditional flags
+#   let run_output = (
+#     try {
+#       az pipelines run --name $pipeline_name --branch $branch_name ...$debug_flag ...$params_flags --output json | from json
+#     } catch {
+#       echo "Error: Azure CLI command failed or returned invalid JSON for triggering pipeline."
+#       exit 1
+#     }
+#   )
+
+#   let run_id = $run_output.id
+#   let run_web_url = $run_output.url
+
+#   if ($run_id | is-empty) {
+#     echo "Failed to trigger pipeline or get run ID."
+#     exit 1
+#   }
+
+#   echo $"Pipeline run ID: ($run_id)"
+#   echo $"Monitor in browser: ($run_web_url)"
+#   echo "------------------------------------"
+
+#   mut status = "notStarted"
+#   mut result = "unknown"
+
+#   while ($status != "completed" and $status != "cancelling") {
+#     echo $"Checking status of run ($run_id)" # Print without newline
+#     for _ in 1..3 {
+#       print -n "." # Add dots for visual feedback
+#       sleep 0.5sec
+#     }
+#     print "" # Newline after dots
+
+#     let current_run_details = (
+#       try {
+#         ^az pipelines runs show --id $run_id ...$debug_flag --query '{status:status, result:result}' -o json | from json
+#       } catch {
+#         echo "Error: Azure CLI command failed or returned invalid JSON for checking status."
+#         # exit 1
+#       }
+#     )
+
+#     $status = $current_run_details.status
+#     $result = $current_run_details.result
+
+#     echo $"Current Status: ($status)"
+#     if ($status == "completed") {
+#       echo $"Final Result: ($result)"
+#     }
+
+#     # Only sleep if the pipeline is not yet completed or cancelling
+#     if ($status != "completed" and $status != "cancelling") {
+#       sleep 15sec # Wait for 15 seconds before checking again
+#     }
+#   }
+
+#   echo "------------------------------------"
+#   let end_time = (date now)
+#   let elapsed_duration = ($end_time - $start_time)
+#   echo $"Pipeline run ($run_id) has finished with status: ($status) and result: ($result)."
+#   echo $"Total time elapsed: ($elapsed_duration)"
+
+#   if ($result == "succeeded") {
+#     echo "🚀 Pipeline completed successfully!"
+#     # exit 0
+#   } else {
+#     echo "Pipeline finished with a non-success result."
+#     # exit 1 # Indicate failure
+#   }
+
+#   # Open pipeline results in browser if requested
+#   if $show_output {
+#     echo "------------------------------------"
+#     echo "Opening pipeline results in browser..."
+#     ^az pipelines runs show --id $run_id --open ...$debug_flag
+#   }
+# }
 
 def "mods-gd" [] {
   git diff
