@@ -358,11 +358,11 @@ def "trigger-and-monitor-pipeline" [
   echo $"Total time elapsed: ($elapsed_duration)"
 
   if ($result == "succeeded") {
-    echo "Pipeline completed successfully!"
-    true
+    echo "🚀 Pipeline completed successfully!"
+    # true
   } else {
     echo "Pipeline finished with a non-success result."
-    false
+    # false
   }
 }
 
