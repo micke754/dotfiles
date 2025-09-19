@@ -105,7 +105,7 @@ layout {
 
             command_calendar_command "/home/kmichaels/.config/zellij/scripts/get_next_event.sh"
             command_calendar_interval "300" // 5 minutes
-            command_calendar_format "#[bg=$color_gray,fg=$white]{stdout} "
+            command_calendar_format "#[bg=$color_gray,fg=$color_fg]{stdout} "
             command_calendar_rendermode "static"
             
 
