@@ -99,6 +99,7 @@ config.keys = {
 
 	-- Control Palette
 	{ key = "p", mods = "CTRL|SHIFT", action = action.ActivateCommandPalette },
+	{ key = "Space", mods = "CTRL|SHIFT", action = action.QuickSelect },
 
 	-- Copy selection to clipboard
 	{ key = "c", mods = "SHIFT|CTRL", action = action.CopyTo("Clipboard") },
