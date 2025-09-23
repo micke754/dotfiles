@@ -76,12 +76,15 @@ typeCheckingMode = "off"
 command = "ruff"
 args = ["server"]
 
+[language-server.ruff.config.ruff]
+select = ["ALL"]
+
 [language-server.ty]
 command = "ty"
 args = ["server"]
 
-[language-server.ty.config.ty]
-disableLanguageServices = false
+# [language-server.ty.config.ty]
+# disableLanguageServices = false
 
 [language-server.gpt]
 command = "helix-gpt --handler=codeium"
@@ -105,8 +108,8 @@ auto-format = true
 
 [[language]]
 name = "python"
-language-servers = ["scls", "pyrefly", "ruff"]
-# language-servers = ["scls", "basedpyrigh","ruff", "ty"]                                       
+# language-servers = ["scls", "pyrefly", "ruff"]
+language-servers = ["scls", "ty", "ruff"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
 auto-format = true
 
