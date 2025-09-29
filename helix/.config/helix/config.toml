@@ -64,10 +64,11 @@ V = ["select_mode", "extend_to_line_bounds"]
 # "r" = [":sh steel %[buffer_name]"]
 
 [keys.normal.space.t]
-"s" = ["yank_to_clipboard", ":sh ~/Bash-Scripts/wezterm-to-repl"]
+"s" = ["yank_to_clipboard", ":sh ~/Bash-Scripts/wezterm-to-repl-simplified"]
 # "r" = [":sh steel %[buffer_name]"]
 "r" = [":sh uv run %[buffer_name]"]
 "t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
+"v" = [":sh echo $(pykatas v)"]
 
 [keys.normal.space.w]
 "w" = [":write"]

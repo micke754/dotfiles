@@ -89,7 +89,8 @@ def --env find-git-status [...args] {
 # Aliases
 
 # alias hx = helix
-alias bat = bat --decorations never
+alias pkcd = cd (pykatas path --dir)
+alias cat = bat
 alias copy = pbcopy
 alias ga = git add -A
 alias gp = git push
