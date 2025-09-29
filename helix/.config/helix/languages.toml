@@ -215,8 +215,7 @@ auto-format = false
 name = "sql"
 file-types = ["sql"]
 language-servers = [
-  "buffer-language-server",
-  "sqlfluff-lsp",
+  # "sqlfluff-lsp",
   "databricks-sql-lsp",
 ]
 formatter = { command = "sqlfmt-rs" }
