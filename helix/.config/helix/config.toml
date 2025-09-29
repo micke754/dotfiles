@@ -83,8 +83,9 @@ V = ["select_mode", "extend_to_line_bounds"]
 "m" = [":set-language markdown"]
 
 
-# # create a new minor mode bound to `+`
-# [keys.normal."+"]
+# create a new minor mode bound to `+`
+[keys.normal."+"]
+"f" = ":pipe sqlfmt-rs"
 # m = ":run-shell-command echo 2"
 # c = ":run-shell-command cargo build"
 # t = ":run-shell-command cargo test"

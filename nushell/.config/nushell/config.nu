@@ -94,7 +94,8 @@ def --env find-git-status [...args] {
 }
 
 # Aliases
-# alias hx = helix
+alias sudo = doas
+alias hx = helix
 alias bat = bat --decorations never
 alias ga = git add -A
 alias gd = git diff
@@ -108,10 +109,10 @@ alias npl = nix profile list
 # alias gemini = npx https://github.com/google-gemini/gemini-cli
 
 $env.config.show_banner = false
-$env.config.buffer_editor = "hx"
+$env.config.buffer_editor = "helix"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
-$env.EDITOR = "hx"
+$env.EDITOR = "helix"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")
@@ -381,10 +382,10 @@ let fish_completer = {|spans|
 }
 
 $env.config.completions.external =  {
-  enable: false
+  enable: true
   completer: $carapace_completer
 }
 $env.config.completions.external =  {
-  enable: true
+  enable: false
   completer: $fish_completer
 }

@@ -213,11 +213,11 @@ auto-format = false
 
 [[language]]
 name = "sql"
-file-types = ["sql", "plsql"]
+file-types = ["sql"]
 language-servers = [
   "buffer-language-server",
   "sqlfluff-lsp",
   "databricks-sql-lsp",
 ]
-# formatter = { command = "sqlfmt", args = ["--line-length", "88", "-"] }
+formatter = { command = "sqlfmt-rs" }
 auto-format = false

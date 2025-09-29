@@ -16,8 +16,9 @@ export EDITOR=helix
 alias ls='ls --color=auto'
 alias la='eza -a'
 alias grep='grep --color=auto'
-# alias hx='helix'
+alias hx='helix'
 alias cl='clear'
+alias sudo=doas
 
 # Starship
 eval "$(starship init bash)"
@@ -61,3 +62,4 @@ FZF_ALT_C_COMMAND= eval "$(fzf --bash)"
 # export SECRET_DB_USER="secretuser"
 # export SECRET_DB_PASS="secretpass"
 # export DBEE_URL=token:dapXXXX-X@adb-XXXX.XX.azuredatabricks.net:443/sql/1.0/warehouses/XXX?catalog=XXX
+# Export secrets
