@@ -173,8 +173,8 @@ source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
 [[language]]
 name = "sql"
 language-servers = ["databricks-sql-lsp"]
-formatter = { command = "sqlfastfmt" }
-auto-format = false
+formatter = { command = "sqlfmt-rs" }
+auto-format = true
 
 [[language]]
 name = "scheme"

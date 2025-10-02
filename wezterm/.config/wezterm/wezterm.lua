@@ -1,6 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
-local font_size = 15
+local font_size = 14
 
 -- Combined status: leader indicator (left) + zoom + time + battery (right)
 wezterm.on("update-status", function(window, pane)
@@ -69,7 +69,8 @@ config.font_size = font_size
 config.font = wezterm.font("MartianMono Nerd Font Propo")
 
 -- config.color_scheme = "Rosé Pine (base16)"
-config.color_scheme = "rose-pine"
+config.color_scheme = "tokyonight_night"
+-- config.color_scheme = "rose-pine"
 -- config.color_scheme = "catppuccin-mocha"
 
 config.window_frame = {
@@ -115,6 +116,7 @@ config.keys = {
 	{ key = "RightArrow", mods = "LEADER", action = action.ActivatePaneDirection("Right") },
 	{ key = "UpArrow", mods = "LEADER", action = action.ActivatePaneDirection("Up") },
 	{ key = "DownArrow", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
+	{ key = "o", mods = "LEADER", action = action.ActivatePaneDirection("Next") },
 
 	-- Tab management (like tmux windows)
 	{ key = "c", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },

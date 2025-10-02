@@ -1,4 +1,5 @@
-theme = "base16_transparent" # good default "base16_transparent"
+theme = "tokyonight" # good default "base16_transparent"
+
 [editor]
 # scrolloff = 25
 auto-format = true
@@ -80,3 +81,6 @@ V = ["select_mode", "extend_to_line_bounds"]
 "s" = [":lsp-stop"]
 "r" = [":lsp-restart"]
 "w" = [":lsp-workspace-command"]
+
+[keys.normal."+"]
+"f" = [":pipe sqlfmt-rs"]
