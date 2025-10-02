@@ -155,6 +155,7 @@ config.keys = {
 
 	-- Zoom pane (like tmux)
 	{ key = "z", mods = "LEADER", action = action.TogglePaneZoomState },
+	{ key = "s", mods = "LEADER", action = action.ShowLauncherArgs({ flags = "WORKSPACES" }) },
 	{ key = "w", mods = "LEADER", action = action.ShowLauncherArgs({ flags = "WORKSPACES" }) },
 	{
 		key = "$",
