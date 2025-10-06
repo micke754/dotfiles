@@ -96,7 +96,7 @@ def --env find-git-status [...args] {
 # Aliases
 alias sudo = doas
 alias hx = helix
-alias bat = bat --decorations never
+alias cat = bat 
 alias ga = git add -A
 alias gd = git diff
 alias gl = git log --oneline --graph -n 10
@@ -113,6 +113,7 @@ $env.config.buffer_editor = "helix"
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 $env.EDITOR = "helix"
+$env.DB_REPL_PAGER = "less"
 
 # Starship
 mkdir ($nu.data-dir | path join "vendor/autoload")
