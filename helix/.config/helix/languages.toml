@@ -214,9 +214,7 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-language-servers = [
-  # "sqlfluff-lsp",
-  "databricks-sql-lsp",
-]
-formatter = { command = "sqlfmt-rs" }
+language-servers = ["sqlfluff-lsp", "databricks-sql-lsp"]
+# formatter = { command = "sqlfmt-rs", args = ["-c"] }
+# formatter = { command = "sqlfmt", args = ["-"] }
 auto-format = false

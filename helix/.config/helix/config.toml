@@ -85,8 +85,12 @@ V = ["select_mode", "extend_to_line_bounds"]
 
 # create a new minor mode bound to `+`
 [keys.normal."+"]
-"f" = ":pipe sqlfmt-rs"
+"f" = ":format"
+"t" = ":pipe 'sqlfmt-rs -c'"
 # m = ":run-shell-command echo 2"
 # c = ":run-shell-command cargo build"
 # t = ":run-shell-command cargo test"
 # n = ":run-shell-command echo 3"
+[keys.select."+"]
+"f" = ":format"
+"t" = ":pipe 'sqlfmt-rs -c'"

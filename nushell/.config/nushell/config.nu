@@ -100,6 +100,7 @@ alias cat = bat
 alias ga = git add -A
 alias gd = git diff
 alias gl = git log --oneline --graph -n 10
+alias glf = git log --oneline --graph origin/main..HEAD
 alias gp = git push
 alias gs = git status
 alias la = eza -a
