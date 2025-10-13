@@ -17,7 +17,8 @@ $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 $env.config.use_kitty_protocol = false
 $env.EDITOR = "hx"
-$env.default_model = "oss-20"
+# $env.PAGER = "more"
+$env.default_model = "lite"
 # $env.NVIM_APPNAME = "hex-vim"
 
 # # Paths
@@ -95,8 +96,8 @@ alias copy = pbcopy
 alias ga = git add -A
 alias gp = git push
 alias gd = git diff 
-alias gl = git log --oneline --graph 
-alias glf = git log --oneline --graph HEAD...origin/main
+alias gl = git log --oneline --graph -n 5
+alias glf = git log --oneline --graph origin/main..HEAD
 alias gs = git status 
 alias la = lsd -a
 alias ll = lsd -l
