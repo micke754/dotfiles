@@ -147,10 +147,8 @@ def "fgs" [] {
     }
 }
 
-
-
-
 # Az trigger and monitor pipelines
+
 def "trigger-and-monitor-pipeline" [
   pipeline_name: string
   branch_name: string
@@ -229,13 +227,12 @@ def "trigger-and-monitor-pipeline" [
 
   if ($result == "succeeded") {
     echo "🚀 Pipeline completed successfully!"
-    true
+    # true
   } else {
     echo "Pipeline finished with a non-success result."
-    false
+    # false
   }
 }
-
 
 # def "trigger-and-monitor-pipeline" [
 #   pipeline_name: string # The name of the Azure DevOps pipeline
