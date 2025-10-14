@@ -83,4 +83,6 @@ V = ["select_mode", "extend_to_line_bounds"]
 "w" = [":lsp-workspace-command"]
 
 [keys.normal."+"]
-"f" = [":pipe sqlfmt-rs"]
+"f" = [":pipe sqlfmt-rs -c"]
+[keys.select."+"]
+"f" = [":pipe sqlfmt-rs -c"]
