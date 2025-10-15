@@ -126,6 +126,12 @@ zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
 # Zoxide
 source ~/.zoxide.nu
 
+def replace-env [] {
+  ls **/*.sql | each {
+  |file| open $file.name | str replace '_$(deployEnv)' '_dev' | save -f $file.name
+  }
+}
+
 def practice [] {
   ttyper -l english-ngrams -w 10 
 }

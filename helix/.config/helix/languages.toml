@@ -84,6 +84,16 @@ feature_unicode_input = false        # enable "unicode input"
 feature_paths = true                 # enable path completion
 feature_citations = false            # enable citation completion (only on `citation` feature enabled)
 
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+# # Optional: control diagnostics behaviour
+# [language-server.yaml-language-server.config]
+# yaml = { validate = true, hover = true, completion = true, schemas = { "/home/kmichaels/.config/helix/schemas/databricks-job-schema.json" = "databricks*.yml" } }
+
+[language-server.databricks-yaml]
+command = "databricks-yaml-lsp"
 
 [[language]]
 name = "scheme"
@@ -129,9 +139,9 @@ file-types = ['yml', 'yaml']
 formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
 auto-format = false
 language-servers = [
-  "yaml-language-server",
-  "ansible-language-server",
-  "buffer-language-server",
+  # "yaml-language-server",
+  # "ansible-language-server",
+  "databricks-yaml-lsp",
   "harper-ls",
 ]
 
@@ -214,7 +224,10 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-language-servers = ["sqlfluff-lsp", "databricks-sql-lsp"]
-# formatter = { command = "sqlfmt-rs", args = ["-c"] }
+language-servers = [
+  # "sqlfluff-lsp",
+  "databricks-sql-lsp",
+]
+formatter = { command = "sqlfmt-rs", args = ["-c", "--dialect", "databricks"] }
 # formatter = { command = "sqlfmt", args = ["-"] }
 auto-format = false
