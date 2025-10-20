@@ -537,7 +537,7 @@
                         ]
                     },
                     {
-                        "description": "SpaceFN: Space+d to hyphen, Space+v to equal_sign, Space+h to semicolon, Space+x to backslash",
+                        "description": "SpaceFN: Space+d to hyphen, Space+v to return, Space+h to semicolon, Space+x to backslash",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -581,7 +581,7 @@
                                     "key_code": "v",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "key_code": "equal_sign" }],
+                                "to": [{ "key_code": "return_or_enter" }],
                                 "type": "basic"
                             },
                             {
@@ -790,6 +790,10 @@
                             "to": [{ "key_code": "d" }]
                         },
                         {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
                             "from": { "key_code": "d" },
                             "to": [{ "key_code": "s" }]
                         },
@@ -868,10 +872,6 @@
                         {
                             "from": { "key_code": "z" },
                             "to": [{ "key_code": "x" }]
-                        },
-                        {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "left_control" }]
                         }
                     ]
                 },
