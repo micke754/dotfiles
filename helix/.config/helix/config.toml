@@ -1,11 +1,12 @@
-theme = "tokyonight_storm" # good default base16_transparent
-
+theme = "tokyonight_storm" # good default base16_transparent tokyonight_storm
 [editor]
 # scrolloff = 15
 auto-format = true
 continue-comments = false
 true-color = true
 gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers" if needed
+insert-final-newline = false
+# rainbow-brackets = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -66,6 +67,12 @@ V = ["select_mode", "extend_to_line_bounds"]
 "r" = [":sh uv run %[buffer_name]"]
 "t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
 
+[keys.select.space.t]
+"s" = ["yank_to_clipboard", ":sh send-to-tmux"]
+# "r" = [":sh steel %[buffer_name]"]
+"r" = [":sh uv run %[buffer_name]"]
+"t" = [":sh echo $(uv run pytest -q --tb=line --disable-warnings)"]
+
 [keys.normal.space.t.c]
 "r" = [":config-reload"]
 "o" = [":config-open"]
@@ -87,7 +94,6 @@ V = ["select_mode", "extend_to_line_bounds"]
 [keys.normal."+"]
 "f" = ":format"
 "t" = ":pipe 'sqlfmt-rs -c'"
-"s" = ":pipe 'sqlfmt - 2>/dev/null'"
 # m = ":run-shell-command echo 2"
 # c = ":run-shell-command cargo build"
 # t = ":run-shell-command cargo test"
@@ -95,4 +101,3 @@ V = ["select_mode", "extend_to_line_bounds"]
 [keys.select."+"]
 "f" = ":format"
 "t" = ":pipe 'sqlfmt-rs -c'"
-"s" = ":pipe 'sqlfmt - 2>/dev/null'"

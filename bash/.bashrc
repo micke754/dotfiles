@@ -16,7 +16,7 @@ export EDITOR=helix
 alias ls='ls --color=auto'
 alias la='eza -a'
 alias grep='grep --color=auto'
-alias hx='helix'
+# alias hx='helix'
 alias cl='clear'
 alias sudo=doas
 
@@ -40,6 +40,10 @@ function y() {
 export PATH="/home/kmichaels/.local/bin:$PATH"
 export PATH="/home/kmichaels/.cargo/bin:$PATH"
 export PATH="/home/kmichaels/.bun/bin:$PATH"
+export XDG_RUNTIME_DIR="/mnt/wslg/runtime-dir"
+
+# LANG
+export LANG="en_NZ.UTF-8"
 
 # Set up fzf key bindings and fuzzy completion
 # eval "$(fzf --bash)"

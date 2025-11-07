@@ -28,10 +28,14 @@
 #   # | append /home/kmichaels/Open-Source/Mods/dist
 # )
 
+# Locale
+$env.LANG = "en_NZ.UTF-8"
+
 # Helps gpg to know what prompt to use
 $env.GPG_TTY = (tty)
 
 $env.XDG_CONFIG_HOME = "/home/kmichaels/.config"
+$env.XDG_RUNTIME_DIR = "/mnt/wslg/runtime-dir"
 
 # Topiary Nushell Fmt
 $env.TOPIARY_CONFIG_FILE = ($env.XDG_CONFIG_HOME | path join topiary languages.ncl)
@@ -46,6 +50,17 @@ def --env y [...args] {
     cd $cwd
   }
   rm -fp $tmp
+}
+
+def add_newline [] {
+  $in | each { |file|
+    let filename = if ($file | describe | str
+starts-with "record") { $file.name } else { $file }
+    let content = (open $filename)
+    if not ($content | str ends-with "\n") {
+      $content + "\n" | save -f $filename
+    }
+  }
 }
 
 def copy [] {
@@ -95,7 +110,7 @@ def --env find-git-status [...args] {
 
 # Aliases
 alias sudo = doas
-alias hx = helix
+# alias hx = helix
 alias cat = bat 
 alias ga = git add -A
 alias gd = git diff
@@ -249,11 +264,11 @@ def "gc" [] {
   # Run git commit with all changes staged
   git commit -a
 
-  # Add typing practice
-  print "\n🎯 Time for some typing practice!"
-  print "Complete 25 English n-grams:"
-  sleep 1sec
-  practice
+  # # Add typing practice
+  # print "\n🎯 Time for some typing practice!"
+  # print "Complete 25 English n-grams:"
+  # sleep 1sec
+  # practice
   
 }
 

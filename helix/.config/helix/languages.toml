@@ -1,4 +1,11 @@
 # LSP Server Config
+[language-server.air]
+command = "air"
+args = ["language-server"]
+
+[language-server.r-lang-server]
+command = "R"
+args = ["--no-echo", "-e", "languageserver::run()"]
 
 [language-server.steel-language-server]
 command = "steel-language-server"
@@ -195,9 +202,6 @@ name = "typst"
 auto-format = true
 formatter = { command = "typstyle", args = ["--inplace"] }
 
-[[grammar]]
-name = "r"
-source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
 
 [language-server.powershell-editor-services]
 name = 'powershell-editor-services'
@@ -209,6 +213,16 @@ args = [
   '-Command',
   '/home/kmichaels/Software/PowerShellEditorServices/PowerShellEditorServices/Start-EditorServices.ps1 -SessionDetailsPath /home/kmichaels/Software/PowerShellEditorServices/PowerShellEditorServices.sessions.lsp.json -LanguageServiceOnly -Stdio',
 ]
+
+# [[grammar]]
+# name = "r"
+# source = { git = "https://github.com/r-lib/tree-sitter-r", rev = "main" }
+
+[[language]]
+name = "r"
+file-types = ["r", "rmarkdown"]
+language-servers = ["air", "r-lang-server"]
+auto-format = true
 
 [[language]]
 name = 'powershell'
@@ -224,10 +238,7 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-language-servers = [
-  # "sqlfluff-lsp",
-  "databricks-sql-lsp",
-]
-formatter = { command = "sqlfmt-rs", args = ["-c", "--dialect", "databricks"] }
-# formatter = { command = "sqlfmt", args = ["-"] }
+language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"]
+# formatter = { command = "sqlfmt-rs" }
+# formatter = { command = "sqlfmt", arg = ["-"] }
 auto-format = false
