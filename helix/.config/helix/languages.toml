@@ -18,6 +18,7 @@ args = ["--stdio"]
 config = { "sqlfluff-lsp" = { dialect = "databricks", exclude_rules = [
   "LT12",
   "AM04",
+  "RF05",
 ] } }
 
 [language-server.databricks-sql-lsp]
