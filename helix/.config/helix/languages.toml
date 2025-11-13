@@ -13,9 +13,12 @@ command = "steel-language-server"
 [language-server.sqlfluff-lsp]
 command = "sqlfluff-lsp"
 args = ["--stdio"]
+# config = { dialect = "databricks", exclude_rules = ["LT12", "AM04"] }
 
-[language-server.sqlfluff-lsp.config]
-dialect = "databricks"
+config = { "sqlfluff-lsp" = { dialect = "databricks", exclude_rules = [
+  "LT12",
+  "AM04",
+] } }
 
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
