@@ -1,11 +1,11 @@
 theme = "tokyonight_storm" # good default base16_transparent tokyonight_storm
 [editor]
-# scrolloff = 15
+scrolloff = 15
 auto-format = true
 continue-comments = false
 true-color = true
 gutters = ["diff", "diagnostics", "spacer"] # add "line-numbers" if needed
-insert-final-newline = false
+insert-final-newline = true
 # rainbow-brackets = true
 
 [editor.cursor-shape]

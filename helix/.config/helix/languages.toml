@@ -17,8 +17,27 @@ args = ["--stdio"]
 
 config = { "sqlfluff-lsp" = { dialect = "databricks", exclude_rules = [
   "LT12",
+  # LT12: # [layout.end_of_file] Files must end with a single trailing newline.       
+  #       groups: all, core, layout aliases: L009, layout.end-of-file
+  "LT02",
+  # LT02: [layout.indent] Incorrect Indentation.
+  #       groups: all, core, layout aliases: L002, L003, L004                       
+
   "AM04",
+  # AM04: [ambiguous.column_count] Query produces an unknown number of result       
+  #       columns.                                                                  
+  #       groups: all, ambiguous aliases: L044                                      
+
+  # "AM09",
+  # "CP02",
+  # CP02: [capitalisation.identifiers] Inconsistent capitalisation of unquoted      
+  #       identifiers.                                                              
+  #       groups: all, core, capitalisation aliases: L014                           
+
   "RF05",
+  # RF05: [references.special_chars] Do not use special characters in identifiers.  
+  #       groups: all, references aliases: L057                                     
+
 ] } }
 
 [language-server.databricks-sql-lsp]
