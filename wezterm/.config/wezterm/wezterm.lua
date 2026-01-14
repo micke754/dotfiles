@@ -69,9 +69,9 @@ config.font_size = font_size
 config.font = wezterm.font("MartianMono Nerd Font Propo")
 
 -- config.color_scheme = "Rosé Pine (base16)"
-config.color_scheme = "tokyonight_night"
+-- config.color_scheme = "tokyonight_night"
 -- config.color_scheme = "rose-pine"
--- config.color_scheme = "catppuccin-mocha"
+config.color_scheme = "catppuccin-mocha"
 
 config.window_frame = {
 	active_titlebar_bg = "#191724", -- Rose Pine base

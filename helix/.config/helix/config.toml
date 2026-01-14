@@ -1,4 +1,4 @@
-theme = "tokyonight" # good default "base16_transparent"
+theme = "base16_transparent" # good default "base16_transparent" "catppuccin_mocha"
 
 [editor]
 # scrolloff = 25
@@ -31,7 +31,7 @@ cursor-line = "hint"
 other-lines = "error"
 
 [editor.smart-tab]
-enable = false
+enable = true
 
 [keys.normal]
 
@@ -83,6 +83,6 @@ V = ["select_mode", "extend_to_line_bounds"]
 "w" = [":lsp-workspace-command"]
 
 [keys.normal."+"]
-"f" = [":pipe sqlfmt-rs -c"]
+"f" = [":format"]
 [keys.select."+"]
-"f" = [":pipe sqlfmt-rs -c"]
+"f" = [":format"]

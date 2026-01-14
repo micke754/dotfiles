@@ -18,7 +18,7 @@ $env.config.shell_integration.osc133 = false
 $env.config.use_kitty_protocol = false
 $env.EDITOR = "hx"
 # $env.PAGER = "more"
-$env.default_model = "lite"
+$env.default_model = "flash"
 # $env.NVIM_APPNAME = "hex-vim"
 
 # # Paths
