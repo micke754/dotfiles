@@ -241,7 +241,7 @@ def "gc" [] {
   # Generate commit message
   $input_for_mods
   | mods --model lite --no-cache """
-  Generate a conventional commit message for these changes. Use this format:
+  Generate a conventional commit message for these changes but humanise the output. Use this format:
 
   <type>[optional scope]: <description>
 

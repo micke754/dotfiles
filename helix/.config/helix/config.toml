@@ -1,4 +1,5 @@
-theme = "tokyonight_storm" # good default base16_transparent tokyonight_storm
+theme = "catppuccin_macchiato"
+# good default base16_transparent tokyonight_storm catppuccin_mocha catppuccin_macchiato
 [editor]
 scrolloff = 15
 auto-format = true
