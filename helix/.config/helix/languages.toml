@@ -35,7 +35,7 @@ args = ["--stdio"]
 dialect = "databricks"
 config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini"
 use_workspace_config = false
-exclude_rules = ["LT12", "ST05", "RF03", "RF05"]
+exclude_rules = ["LT12", "ST05", "RF03", "RF05", "AM04", "AM09"]
 
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
@@ -153,7 +153,7 @@ name = "python"
 # language-servers = ["pyright", "ty", "ruff", "buffer-language-server"]
 language-servers = ["scls", "pyright", "ty"]
 formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
-auto-format = true
+auto-format = false
 
 
 [[language]]
