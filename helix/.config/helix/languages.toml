@@ -24,6 +24,7 @@ command = "steel-language-server"
 # "sqlfluff-lsp" = { dialect = "databricks", config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini", use_workspace_config = false, exclude_rules = [
 #   "LT12",
 #   "ST05",
+#   "ST06",
 #   "RF03",
 #   "RF05",
 # ] }
@@ -35,7 +36,7 @@ args = ["--stdio"]
 dialect = "databricks"
 config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini"
 use_workspace_config = false
-exclude_rules = ["LT12", "ST05", "RF03", "RF05", "AM04", "AM09"]
+exclude_rules = ["LT12", "ST05", "ST06", "RF03", "RF05", "AM04", "AM09", "CV06"]
 
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
@@ -255,7 +256,7 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"]
+language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] # "sqlfluff-lsp"
 # formatter = { command = "sqlfmt-rs" }
 # formatter = { command = "sqlfmt", arg = ["-"] }
 auto-format = false

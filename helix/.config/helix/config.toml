@@ -1,4 +1,4 @@
-theme = "catppuccin_macchiato"
+theme = "base16_transparent"
 # good default base16_transparent tokyonight_storm catppuccin_mocha catppuccin_macchiato
 [editor]
 scrolloff = 15
@@ -99,6 +99,7 @@ V = ["select_mode", "extend_to_line_bounds"]
 # c = ":run-shell-command cargo build"
 # t = ":run-shell-command cargo test"
 # n = ":run-shell-command echo 3"
+
 [keys.select."+"]
 "f" = ":format"
 "t" = ":pipe 'sqlfmt-rs -c'"

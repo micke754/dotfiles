@@ -302,92 +302,55 @@ def nix-profile-replace [
   print "SUCCESS: Profile replaced."
 }
 
+def "db pick" [resource: string] {
+  let resource_rec = databricks $resource list
+  | gum filter
+  | split row '  '
 
-# Az trigger and monitor pipelines
+  let resource_id = $resource_rec.0 #first value
+  let resource_name = $resource_rec | skip 1 
 
-def "trigger-and-monitor-pipeline" [
-  pipeline_name: string
-  branch_name: string
-  --debug
-  --parameters: list<string> = []
-] {
-  let start_time = (date now)
-  echo $"Triggering pipeline: ($pipeline_name) on branch ($branch_name)..."
+  print $"resource rec ($resource_rec)"
+  print $"resource name ($resource_name)"
+  print $"resource id ($resource_id)"
+  
+}
 
-  let debug_flag = if $debug { ["--debug"] } else { [] }
-  let params_flags = if (not ($parameters | is-empty)) { ["--parameters"] | append $parameters } else { [] }
 
-  let run_output = (
-    try {
-      az pipelines run --name $pipeline_name --branch $branch_name ...$debug_flag ...$params_flags --output json | from json
-    } catch {
-      echo "Error: Azure CLI command failed or returned invalid JSON for triggering pipeline."
-      exit 1
-    }
-  )
+def "db run job" [] {
+  let job: string = databricks jobs list
+  let job_id: string = $job
+  | gum filter
+  | split row ' '
+  | first
 
-  if ($run_output == nothing) {
-    echo $"Error: Failed to trigger pipeline. Branch ($branch_name) may not exist or other error occurred."
-    exit 1
-  }
+  print $"Running databricks job ($job)"
 
-  let run_id = $run_output.id
-  let run_web_url = $run_output.url
+  databricks jobs run-now $job_id
 
-  if ($run_id | is-empty) {
-    echo "Failed to trigger pipeline or get run ID."
-    exit 1
-  }
+}
 
-  echo $"Pipeline run ID: ($run_id)"
-  echo $"Monitor in browser: ($run_web_url)"
-  echo "------------------------------------"
+def "db start cluster" [] {
+  let cluster: string = databricks clusters list
+  let cluster_id: string = $cluster
+  | gum filter
+  | split row ' '
+  | first
 
-  mut status = "notStarted"
-  mut result = "unknown"
+  print $"Starting up databricks cluster ($cluster)"
 
-  while ($status != "completed" and $status != "cancelling") {
-    echo $"Checking status of run ($run_id)"
-    for _ in 1..3 {
-      print -n "."
-      sleep 0.5sec
-    }
-    print ""
+  databricks clusters start $cluster_id
 
-    let current_run_details = (
-      try {
-        ^az pipelines runs show --id $run_id ...$debug_flag --query '{status:status, result:result}' -o json | from json
-      } catch {
-        echo "Error: Azure CLI command failed or returned invalid JSON for checking status."
-      }
-    )
+}
 
-    $status = $current_run_details.status
-    $result = $current_run_details.result
+def "tmux choose" [] {
+  let tmux_sessions: list = tmux ls
+  let session_name: string = $tmux_sessions
+  | gum choose 
+  | split row ': '
+  | first
 
-    echo $"Current Status: ($status)"
-    if ($status == "completed") {
-      echo $"Final Result: ($result)"
-    }
-
-    if ($status != "completed" and $status != "cancelling") {
-      sleep 15sec
-    }
-  }
-
-  echo "------------------------------------"
-  let end_time = (date now)
-  let elapsed_duration = ($end_time - $start_time)
-  echo $"Pipeline run ($run_id) has finished with status: ($status) and result: ($result)."
-  echo $"Total time elapsed: ($elapsed_duration)"
-
-  if ($result == "succeeded") {
-    echo "🚀 Pipeline completed successfully!"
-    # true
-  } else {
-    echo "Pipeline finished with a non-success result."
-    # false
-  }
+  tmux attach -t $session_name
 }
 
 # Completions
