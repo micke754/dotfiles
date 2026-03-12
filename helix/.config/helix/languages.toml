@@ -266,3 +266,7 @@ file-types = ["tmdl", "mojo"]
 [[language]]
 name = "swift"
 file-types = ["dax", "swift"]
+
+[[language]]
+name = "json"
+file-types = ["json", "pbip"]
