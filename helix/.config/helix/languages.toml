@@ -17,18 +17,6 @@ args = ["--no-echo", "-e", "languageserver::run()"]
 [language-server.steel-language-server]
 command = "steel-language-server"
 
-# [language-server.sqlfluff-lsp]
-# command = "sqlfluff-lsp"
-# args = ["--stdio"]
-# [language-server.sqlfluff-lsp.config]
-# "sqlfluff-lsp" = { dialect = "databricks", config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini", use_workspace_config = false, exclude_rules = [
-#   "LT12",
-#   "ST05",
-#   "ST06",
-#   "RF03",
-#   "RF05",
-# ] }
-
 [language-server.sqlfluff-lsp]
 command = "sqlfluff-lsp"
 args = ["--stdio"]
@@ -36,7 +24,17 @@ args = ["--stdio"]
 dialect = "databricks"
 config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini"
 use_workspace_config = false
-exclude_rules = ["LT12", "ST05", "ST06", "RF03", "RF05", "AM04", "AM09", "CV06"]
+exclude_rules = [
+  "LT12",
+  "ST05",
+  "ST06",
+  "RF03",
+  "RF05",
+  "AM04",
+  "AM09",
+  "CV06",
+  "AL03",
+]
 
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
@@ -260,3 +258,11 @@ language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] # "sqlfluff-lsp"
 # formatter = { command = "sqlfmt-rs" }
 # formatter = { command = "sqlfmt", arg = ["-"] }
 auto-format = false
+
+[[language]]
+name = "mojo"
+file-types = ["tmdl", "mojo"]
+
+[[language]]
+name = "swift"
+file-types = ["dax", "swift"]

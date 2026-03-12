@@ -318,26 +318,28 @@ def "db pick" [resource: string] {
 
 
 def "db run job" [] {
-  let job: string = databricks jobs list
-  let job_id: string = $job
+  let job: list = databricks jobs list
   | gum filter
   | split row ' '
-  | first
 
-  print $"Running databricks job ($job)"
+  let job_id: string = $job.0
+  let job_name: string = $job | skip 1
+
+  print $"Running databricks job ($job_name) with id ($job_id)"
 
   databricks jobs run-now $job_id
 
 }
 
 def "db start cluster" [] {
-  let cluster: string = databricks clusters list
-  let cluster_id: string = $cluster
+  let cluster: list = databricks clusters list
   | gum filter
   | split row ' '
-  | first
 
-  print $"Starting up databricks cluster ($cluster)"
+  let cluster_id: string = $cluster.0
+  let cluster_name: string = $cluster | skip 1
+
+  print $"Starting up databricks cluster ($cluster_name)"
 
   databricks clusters start $cluster_id
 

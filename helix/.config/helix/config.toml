@@ -1,4 +1,4 @@
-theme = "base16_transparent"
+theme = "base16_terminal"
 # good default base16_transparent tokyonight_storm catppuccin_mocha catppuccin_macchiato
 [editor]
 scrolloff = 15
