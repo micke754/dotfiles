@@ -158,10 +158,10 @@ auto-format = false
 [[language]]
 name = "yaml"
 file-types = ['yml', 'yaml']
-formatter = { command = 'prettierd', args = ["--parser", "yaml"] }
+formatter = { command = 'yamlfmt', args = ["-"] }
 auto-format = false
 language-servers = [
-  # "yaml-language-server",
+  "yaml-language-server",
   # "ansible-language-server",
   "databricks-yaml-lsp",
   "harper-ls",
