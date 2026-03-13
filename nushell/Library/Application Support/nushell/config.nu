@@ -410,6 +410,58 @@ def nix-profile-replace [
   print "SUCCESS: Profile replaced"
 }
 
+def "db pick" [resource: string] {
+  let resource_rec = databricks $resource list
+  | gum filter
+  | split row '  '
+
+  let resource_id = $resource_rec.0 #first value
+  let resource_name = $resource_rec | skip 1 
+
+  print $"resource rec ($resource_rec)"
+  print $"resource name ($resource_name)"
+  print $"resource id ($resource_id)"
+  
+}
+
+def "db run job" [] {
+  let job: list = databricks jobs list
+  | gum filter
+  | split row ' '
+
+  let job_id: string = $job.0
+  let job_name: string = $job | skip 1
+
+  print $"Running databricks job ($job_name) with id ($job_id)"
+
+  databricks jobs run-now $job_id
+
+}
+
+def "db start cluster" [] {
+  let cluster: list = databricks clusters list
+  | gum filter
+  | split row ' '
+
+  let cluster_id: string = $cluster.0
+  let cluster_name: string = $cluster | skip 1
+
+  print $"Starting up databricks cluster ($cluster_name)"
+
+  databricks clusters start $cluster_id
+
+}
+
+def "tmux choose" [] {
+  let tmux_sessions: list = tmux ls
+  let session_name: string = $tmux_sessions
+  | gum choose 
+  | split row ': '
+  | first
+
+  tmux attach -t $session_name
+}
+
 # Completions
 
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional, but useful
