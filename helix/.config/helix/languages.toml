@@ -5,7 +5,22 @@ command = "tinymist"
 [language-server.sqlfluff-lsp]
 command = "sqlfluff-lsp"
 args = ["--stdio"]
-config = { dialect = "databricks" }
+[language-server.sqlfluff-lsp.config]
+dialect = "databricks"
+config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini"
+use_workspace_config = false
+exclude_rules = [
+  "LT12",
+  "ST05",
+  "ST06",
+  "RF03",
+  "RF05",
+  "AM04",
+  "AM09",
+  "CV06",
+  "AL03",
+]
+
 
 [language-server.databricks-sql-lsp]
 command = "databricks-sql-lsp"
