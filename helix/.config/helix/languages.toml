@@ -213,3 +213,13 @@ name = "typst"
 language-servers = ["tinymist"]                            # "harper-ls"
 auto-format = true
 formatter = { command = "typstyle", args = ["--inplace"] }
+
+
+[[language]]
+name = "tmdl"
+scope = "source.tmdl"
+file-types = ["tmdl"]
+grammar = "python"                      # temporary grammar proxy
+auto-format = false
+language-servers = []                   # avoid bogus Python LSP diagnostics
+indent = { tab-width = 4, unit = "\t" }
