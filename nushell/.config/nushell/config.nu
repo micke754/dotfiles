@@ -317,18 +317,79 @@ def "db pick" [resource: string] {
 }
 
 
+# def "db run job" [] {
+#   let job: list = databricks jobs list
+#   | gum filter
+#   | split row ' '
+
+#   let job_id: string = $job.0
+#   let job_name: string = $job | skip 1
+
+#   print $"Running databricks job ($job_name) with id ($job_id)"
+
+#   databricks jobs run-now $job_id
+
+# }
+
 def "db run job" [] {
-  let job: list = databricks jobs list
-  | gum filter
-  | split row ' '
+  let jobs = (databricks jobs list --output json | from json)
 
-  let job_id: string = $job.0
-  let job_name: string = $job | skip 1
+  let choice = (
+    $jobs
+    | each {|j| $"($j.job_id)\t($j.settings.name)"}
+    | str join (char nl)
+    | gum filter
+  )
 
-  print $"Running databricks job ($job_name) with id ($job_id)"
+  if ($choice | is-empty) {
+    print "No job selected."
+    return
+  }
 
-  databricks jobs run-now $job_id
+  let selected = (
+    $choice
+    | parse -r '^(?P<job_id>\d+)\t(?P<job_name>.*)$'
+    | first
+  )
 
+  let tmp_json = (mktemp -t "db-run.XXXXXX.json")
+
+  # Spinner while command runs, only show output if it fails
+  let spin_cmd = $"databricks jobs run-now ($selected.job_id) --output json | save -f '($tmp_json)'"
+  gum spin --spinner dot --title $"Running ($selected.job_name)..." --show-error -- nu -c $spin_cmd
+
+  let run = (open $tmp_json | from json)
+  rm -f $tmp_json
+
+  {
+    job: $selected.job_name
+    job_id: ($run.job_id? | default $selected.job_id)
+    run_id: ($run.run_id? | default $run.job_run_id? | default "n/a")
+    lifecycle: ($run.state.life_cycle_state? | default $run.status.state? | default "unknown")
+    result: ($run.state.result_state? | default $run.status.termination_details.code? | default "unknown")
+    duration_s: ((($run.run_duration? | default 0) / 1000) | math round)
+    task_count: (($run.tasks? | default [] | length))
+    url: ($run.run_page_url? | default "")
+  } | table
+
+  let task_rows = (
+    $run.tasks?
+    | default []
+    | each {|t|
+      {
+        task: ($t.task_key? | default "unknown")
+        result: ($t.state.result_state? | default $t.status.termination_details.code? | default "unknown")
+        duration_s: ((($t.execution_duration? | default 0) / 1000) | math round)
+        run_id: ($t.run_id? | default "n/a")
+      }
+    }
+    | sort-by task
+  )
+
+  if (($task_rows | length) > 0) {
+    print ""
+    $task_rows | table
+  }
 }
 
 def "db start cluster" [] {
