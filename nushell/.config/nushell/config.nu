@@ -317,20 +317,6 @@ def "db pick" [resource: string] {
 }
 
 
-# def "db run job" [] {
-#   let job: list = databricks jobs list
-#   | gum filter
-#   | split row ' '
-
-#   let job_id: string = $job.0
-#   let job_name: string = $job | skip 1
-
-#   print $"Running databricks job ($job_name) with id ($job_id)"
-
-#   databricks jobs run-now $job_id
-
-# }
-
 def "db run job" [] {
   let jobs = (databricks jobs list --output json | from json)
 
@@ -358,7 +344,7 @@ def "db run job" [] {
   let spin_cmd = $"databricks jobs run-now ($selected.job_id) --output json | save -f '($tmp_json)'"
   gum spin --spinner dot --title $"Running ($selected.job_name)..." --show-error -- nu -c $spin_cmd
 
-  let run = (open $tmp_json | from json)
+  let run = (open $tmp_json)
   rm -f $tmp_json
 
   {

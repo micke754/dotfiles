@@ -25,6 +25,9 @@ dialect = "databricks"
 config_path = "/home/kmichaels/.config/sqlfluff/sqlfluff-lsp.ini"
 use_workspace_config = false
 exclude_rules = [
+  "LT09",
+  "LT02",
+  "LT12",
   "LT12",
   "ST05",
   "ST06",
@@ -254,9 +257,11 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] # "sqlfluff-lsp"
+# language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] # "sqlfluff-lsp"
+language-servers = ["databricks-sql-lsp"] # "sqlfluff-lsp"
 # formatter = { command = "sqlfmt-rs" }
-# formatter = { command = "sqlfmt", arg = ["-"] }
+# formatter = { command = "sqlfmt" }
+formatter = { command = "sqlfmt", args = ["-", "-l", "80"] }
 auto-format = false
 
 [[language]]
