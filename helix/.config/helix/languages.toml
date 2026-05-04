@@ -27,7 +27,7 @@ use_workspace_config = false
 exclude_rules = [
   "LT09",
   "LT02",
-  "LT12",
+  "LT05",
   "LT12",
   "ST05",
   "ST06",
@@ -213,8 +213,8 @@ formatter = { command = "nixpkgs-fmt" }
 
 [[language]]
 name = "nu"
-auto-format = true
-formatter = { command = "topiary", args = ["format", "--language", "nu"] }
+auto-format = false
+formatter = { command = "nufmt", args = ["--stdin"] }
 
 [[language]]
 name = "typst"
@@ -257,8 +257,8 @@ auto-format = false
 [[language]]
 name = "sql"
 file-types = ["sql"]
-# language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] # "sqlfluff-lsp"
-language-servers = ["databricks-sql-lsp"] # "sqlfluff-lsp"
+# language-servers = ["databricks-sql-lsp", "sqlfluff-lsp"] 
+language-servers = ["databricks-sql-lsp"]
 # formatter = { command = "sqlfmt-rs" }
 # formatter = { command = "sqlfmt" }
 formatter = { command = "sqlfmt", args = ["-", "-l", "80"] }
