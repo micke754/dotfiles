@@ -101,9 +101,6 @@ args = ["server"]
 # [language-server.ty.config.ty]
 # disableLanguageServices = false
 
-[language-server.gpt]
-command = "helix-gpt --handler=codeium"
-
 # Language Config
 
 [[language]]
@@ -216,10 +213,10 @@ formatter = { command = "typstyle", args = ["--inplace"] }
 
 
 [[language]]
-name = "tmdl"
-scope = "source.tmdl"
+name = "mojo"
+# scope = "source.tmdl"
 file-types = ["tmdl"]
-grammar = "python"                      # temporary grammar proxy
+grammar = "mojo"                        # temporary grammar proxy
 auto-format = false
 language-servers = []                   # avoid bogus Python LSP diagnostics
 indent = { tab-width = 4, unit = "\t" }

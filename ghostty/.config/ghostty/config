@@ -1,5 +1,6 @@
 font-family = "MartianMono Nerd Font Propo"
-font-size = 14
+font-size = 16
 # theme = "Kanagawa Dragon"
 theme = "Rose Pine"
 fullscreen = true
+command = "/Users/kmichaels/.nix-profile/bin/nu"
